@@ -94,11 +94,12 @@
       <Value>../_micro-api/libraries/PrintEx/src</Value>
       <Value>../_micro-api/libraries/RN52</Value>
       <Value>../_micro-api/libraries/Wire/src</Value>
+      <Value>F:/MyArduino/Projects/libraries/ArduinoSTL/src</Value>
+      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>../_micro-api/libraries/Wire/src/utility</Value>
       <Value>C:/Arduino-1.8.5/libraries</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries</Value>
       <Value>F:/MyArduino/Projects/libraries</Value>
-      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src/utility</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src</Value>
       <Value>C://Users//Gerald//AppData//Local//arduino15//packages//arduino//tools//avr-gcc//7.3.0-atmel3.6.1-arduino5////lib//gcc//avr//7.3.0//include</Value>
@@ -144,11 +145,12 @@
       <Value>../_micro-api/libraries/PrintEx/src</Value>
       <Value>../_micro-api/libraries/RN52</Value>
       <Value>../_micro-api/libraries/Wire/src</Value>
+      <Value>F:/MyArduino/Projects/libraries/ArduinoSTL/src</Value>
+      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>../_micro-api/libraries/Wire/src/utility</Value>
       <Value>C:/Arduino-1.8.5/libraries</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries</Value>
       <Value>F:/MyArduino/Projects/libraries</Value>
-      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src/utility</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src</Value>
       <Value>C://Users//Gerald//AppData//Local//arduino15//packages//arduino//tools//avr-gcc//7.3.0-atmel3.6.1-arduino5////lib//gcc//avr//7.3.0//include</Value>
@@ -783,11 +785,12 @@ build.arch=AVR
       <Value>../_micro-api/libraries/PrintEx/src</Value>
       <Value>../_micro-api/libraries/RN52</Value>
       <Value>../_micro-api/libraries/Wire/src</Value>
+      <Value>F:/MyArduino/Projects/libraries/ArduinoSTL/src</Value>
+      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>../_micro-api/libraries/Wire/src/utility</Value>
       <Value>C:/Arduino-1.8.5/libraries</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries</Value>
       <Value>F:/MyArduino/Projects/libraries</Value>
-      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src/utility</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src</Value>
       <Value>C://Users//Gerald//AppData//Local//arduino15//packages//arduino//tools//avr-gcc//7.3.0-atmel3.6.1-arduino5////lib//gcc//avr//7.3.0//include</Value>
@@ -833,11 +836,12 @@ build.arch=AVR
       <Value>../_micro-api/libraries/PrintEx/src</Value>
       <Value>../_micro-api/libraries/RN52</Value>
       <Value>../_micro-api/libraries/Wire/src</Value>
+      <Value>F:/MyArduino/Projects/libraries/ArduinoSTL/src</Value>
+      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>../_micro-api/libraries/Wire/src/utility</Value>
       <Value>C:/Arduino-1.8.5/libraries</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries</Value>
       <Value>F:/MyArduino/Projects/libraries</Value>
-      <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/SPI/src</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src/utility</Value>
       <Value>C:/Users/Gerald/AppData/Local/arduino15/packages/arduino/hardware/avr/1.8.2/libraries/Wire/src</Value>
       <Value>C://Users//Gerald//AppData//Local//arduino15//packages//arduino//tools//avr-gcc//7.3.0-atmel3.6.1-arduino5////lib//gcc//avr//7.3.0//include</Value>

@@ -315,23 +315,25 @@ uint8_t Adafruit_Si4713::getStatus(void) {
 * Refer to AN332.pdf
 */
 void Adafruit_Si4713::powerUp(void) {
-	//_i2ccommand[0] = SI4710_CMD_POWER_UP;
-	//_i2ccommand[1] = 0x12;
-	//// CTS interrupt disabled
-	//// GPO2 output disabled
-	//// Boot normally
-	//// xtal oscillator ENabled
-	//// FM transmit
-	//_i2ccommand[2] = 0x50; // analog input mode
-	//sendCommand(3);
+	/*
+	_i2ccommand[0] = SI4710_CMD_POWER_UP;
+	_i2ccommand[1] = 0x12;
+	// CTS interrupt disabled
+	// GPO2 output disabled
+	// Boot normally
+	// xtal oscillator ENabled
+	// FM transmit
+	_i2ccommand[2] = 0x50; // analog input mode
+	sendCommand(3);
 
-	//// configuration! see page 254
-	//setProperty(SI4713_PROP_REFCLK_FREQ, 32768); // crystal is 32.768
-	//setProperty(SI4713_PROP_TX_PREEMPHASIS, 0);  // 74uS pre-emph (USA std)
-	//setProperty(SI4713_PROP_TX_ACOMP_GAIN, 10);  // max gain?
-	//// setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x02); // turn on limiter, but no
-	//// dynamic ranging
-	//setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0); // turn on limiter and AGC
+	// configuration! see page 254
+	setProperty(SI4713_PROP_REFCLK_FREQ, 32768); // crystal is 32.768
+	setProperty(SI4713_PROP_TX_PREEMPHASIS, 0);  // 74uS pre-emph (USA std)
+	setProperty(SI4713_PROP_TX_ACOMP_GAIN, 10);  // max gain?
+	// setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x02); // turn on limiter, but no
+	// dynamic ranging
+	setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0); // turn off limiter and AGC
+	*/
 
 	/* per Sec 5.1 pg 12
 	CMD = POWER_UP							0x01
