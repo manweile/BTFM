@@ -1,0 +1,10 @@
+# folders to ignore
+.vs/
+Debug/
+Release/
+src/
+__vm/
+# file ext to ignore
+*.xml
+*.cppproj
+*.atsln
