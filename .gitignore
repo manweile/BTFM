@@ -1,0 +1,5 @@
+# folders to ignore
+.vs\
+# file ext to ignore
+*.atsln
+.atsuo
