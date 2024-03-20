@@ -9,4 +9,4 @@ __vm/
 *.cppproj
 *.atsln
 *.elf
-*.atsuo
+.atsuo
