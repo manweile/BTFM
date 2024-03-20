@@ -8,3 +8,4 @@ __vm/
 *.xml
 *.cppproj
 *.atsln
+*.elf

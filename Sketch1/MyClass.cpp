@@ -41,12 +41,15 @@
 #define TFT_DC 9					// @TODO get description
 
 // define keys for #if's
-#define AVAILABLE_FREQS (0)			// normal operation - get lowest noise available frequency
+#define AVAILABLE_FREQS (0)			// debugging : 0 - use defined FMSTATION, normal operation: 1 - scan for & use lowest noise available frequency
 #define DEBUG_FM_FREQ (0)			// debugging - switches to const volatile vars to debug fm frequency acquisition
-#define DEBUG_FM_TX (0)				// debugging - show transmission info
-#define SCAN_AVAILABLE (0)			// debugging - scan for available frequencies and display
-#define SHOW_AVAILABLE (0)			// debugging - show available frequencies
-#define SHOW_SORTED_AVAILABLE (0)	// debugging - show available frequencies sorted by noise level descending
+#define DEBUG_FM_TX (0)				// debugging - use  action breakpoint to show transmission info
+#define SCAN_AVAILABLE (0)			// debugging - use  action breakpoint to scan for available frequencies and display
+#define SHOW_AVAILABLE (0)			// debugging - use  action breakpoint to show available frequencies
+#define SHOW_SORTED_AVAILABLE (0)	// debugging - use  action breakpoint to show available frequencies sorted by noise level descending
+
+// toggle comment off/on for use
+#define NOP __asm__ __volatile__ ("nop\n\t")
 
 // RN52 communications definitions
 #define RN52_BAUD 38400				// per BAL docs, best baud rate for RN52
@@ -142,14 +145,13 @@ void MyClass::setup()
 	}
 
 	#if SCAN_AVAILABLE
-		tft.println("Scanning for broadcasting stations ...");
 		for (freq = MIN_FREQ; freq <= MAX_FREQ; freq += 20) {
 			radio.readTuneMeasure(freq);
 			radio.readTuneStatus();
 
 			if( radio.currNoiseLevel >= BROADCAST_LEVEL) {
-				tft.print("Broadcast at "); tft.print(freq/100.00); tft.print(" Mhz, Current Noise Level: "); tft.print(radio.currNoiseLevel);
-				tft.println();
+				// Brekapoint action message: Broadcast at {freq/100.0} Mhz, Current Noise Level: {radio.currNoiseLevel}
+				NOP;
 			}
 		}
 	#endif
@@ -232,23 +234,20 @@ void MyClass::loop()
 		radio.readTuneStatus();
 
 		if( radio.currAntCap != prevAntCap ) {
-			tft.print("Curr ANT capacitance: "); tft.print(radio.currAntCap);
-			tft.println();
+			// breakpoint action message: Curr ANT capacitance: {radio.currAntCap}
 			prevAntCap = radio.currAntCap;
 		}
 
 		// for changes in ASQ
 		radio.readASQ();
 		if( radio.currASQ != prevASQ ) {
-			tft.print("Curr ASQ: 0x"); tft.print(radio.currASQ, HEX);
-			tft.println();
+			// breakpoint action message: Curr ASQ: 0x{radio.currASQ, HEX}
 			prevASQ = radio.currASQ;
 		}
 
 		// currInLevel changes too often by too little, so need a floor delta value
 		if( abs(radio.currInLevel - prevInLevel) > 10 ) {
-			tft.print("Curr InLevel: "); tft.print(radio.currInLevel);
-			tft.println();
+			// breakpoint action message: "Curr InLevel: {radio.currInLevel}
 			prevInLevel = radio.currInLevel;
 		}
 	#endif
@@ -297,10 +296,10 @@ uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEn
 
 		if( radio.currNoiseLevel < maxLevel) {
 			#if SHOW_AVAILABLE
-				tft.print("Available frequency "); tft.print(freq/100.00); tft.print(" Mhz, Noise Level: "); tft.print(radio.currNoiseLevel);
-				tft.println();
+				// breakpoint action message: Available frequency {freq/100.00} Mhz, Noise Level: {radio.currNoiseLevel}
+				NOP;
 			#endif
-
+			
 			scannedFreqs.push_back(std::make_pair(freq, radio.currNoiseLevel));
 		}
 	}
@@ -311,19 +310,26 @@ uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEn
 	newBroadcast = scannedFreqs[0].first;
 
 	#if SHOW_SORTED_AVAILABLE
-		tft.print("\nSorted available frequencies\n");
-
+		// tft.print("\nSorted available frequencies\n");
+		// breakpoint action message: Sorted available frequencies
+		NOP;
 		// reverse print the sorted scanned frequencies because I want the quietest frequency to be last datum printed
 		for(uint16_t i = scannedFreqs.size() -1; i >= 0; i--) {
-			tft.print("Frequency "); tft.print(scannedFreqs[i].first/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[i].second);
-			tft.println();
+			//tft.print("Frequency "); tft.print(scannedFreqs[i].first/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[i].second);
+			//tft.println();
+			// breakpoint action message: Frequency {scannedFreqs[i].first/100.00} Mhz, Noise Level: {scannedFreqs[i].second}
+			NOP;
 		}
 
-		tft.print("\nFound "); tft.print(scannedFreqs.size()); tft.print(" frequencies with noise less than "); tft.print(maxLevel);
-		tft.println();
+		//tft.print("\nFound "); tft.print(scannedFreqs.size()); tft.print(" frequencies with noise less than "); tft.print(maxLevel);
+		//tft.println();
+		// breakpoint action message: Found {scannedFreqs.size()} frequencies with noise less than {maxLevel}
+		NOP;
 
-		tft.print("Quietest frequency: "); tft.print(newBroadcast/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[0].second);
-		tft.println();
+		//tft.print("Quietest frequency: "); tft.print(newBroadcast/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[0].second);
+		//tft.println();
+		// breakpoint action message: Quietest frequency: {newBroadcast/100.00} Mhz, Noise Level: {scannedFreqs[0].second}
+		NOP;
 	#endif
 
 	return newBroadcast;
