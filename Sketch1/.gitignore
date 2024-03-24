@@ -1,8 +1,8 @@
 # folders to ignore
-.vs/*.*
 Debug/*.*
 Release/*.*
 __vm/*.*
+.vscode/*.*
 # file ext to ignore
 *.xml
 *.cppproj
