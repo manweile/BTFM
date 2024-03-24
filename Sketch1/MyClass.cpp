@@ -22,33 +22,32 @@
 #include <Adafruit_Si4713.h>
 
 // Third Party Functions
-// @TODO prob don't need printex after all
+// @TODO prob don't need printex
 //#include <PrintEx.h>
-//#include <RN52.h>
+#include <RN52.h>
 
 /* Pin definitions*/
 // Si4713
 #define RESETPIN 22					// reset Si4713 on Mega 2560
 
 // RN52
-//#define CMD_DATA ??				//check what should be
-//#define RN52_TX 18				// use uart1 so we are clear of touch screen shield
-//#define RN52_RX 19
+//#define CMD_DATA ??				// @TODO Not sure if I need to drive GPIO 9 low to use RN52 library. May not need at all.
+#define RN52_TX 18					// use uart1 so we are clear of touch screen shield
+#define RN52_RX 19
 
 // 2.8" Capacitive touch shield
-#define SD_CS 4						// @TODO verify description micro sd card chip select
+// #define SD_CS 4						// @TODO verify description micro sd card chip select, only need pin if storing bmps on micro sd.
 #define TFT_CS 10					// @TODO get description
 #define TFT_DC 9					// @TODO get description
 
 // define keys for #if's
-#define AVAILABLE_FREQS (0)			// debugging : 0 - use defined FMSTATION, normal operation: 1 - scan for & use lowest noise available frequency
+#define AVAILABLE_FREQS (1)			// debugging : 0 - use defined FMSTATION, normal operation: 1 - scan for & use lowest noise available frequency
 #define DEBUG_FM_FREQ (0)			// debugging - switches to const volatile vars to debug fm frequency acquisition
 #define DEBUG_FM_TX (0)				// debugging - use  action breakpoint to show transmission info
 #define SCAN_AVAILABLE (0)			// debugging - use  action breakpoint to scan for available frequencies and display
 #define SHOW_AVAILABLE (0)			// debugging - use  action breakpoint to show available frequencies
-#define SHOW_SORTED_AVAILABLE (0)	// debugging - use  action breakpoint to show available frequencies sorted by noise level descending
 
-// toggle comment off/on for use
+// debugging NOP breakpoint, works in conjunction with #if definitions
 #define NOP __asm__ __volatile__ ("nop\n\t")
 
 // RN52 communications definitions
@@ -77,7 +76,7 @@ volatile uint8_t prevASQ;
 volatile int8_t prevInLevel;
 #endif
 
-//@TODO test if these can go to consts
+//@TODO test if these can go to consts (presuming continue to use)
 // tft screen drawing definitions
 #define FRAME_X 10
 #define FRAME_Y 10
@@ -99,7 +98,7 @@ volatile int8_t prevInLevel;
 Adafruit_FT6206 ts = Adafruit_FT6206();
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
-//RN52 rn52 = RN52(???);
+RN52 rn52 = RN52(RN52_RX, RN52_TX);
 
 // @TODO just for reference now, delete once direct control buttons are set up
 boolean recordOn = false;
@@ -158,18 +157,12 @@ void MyClass::setup()
 
 	// normal operation
 	#if AVAILABLE_FREQS
-		// @TODO setup scan frequencies button
-
-		// @TODO offset text to right for button before printing following
-		tft.println("Scanning for available frequencies ...");
+		tft.print("Scanning frequencies ...");
 		station = availableChannels(BROADCAST_LEVEL, FMSTATION, MIN_FREQ, MAX_FREQ);
-
-		// @TODO clear "Scanning for available frequencies ... " text before printing following
-		tft.print("\nTuning into frequency "); tft.print(station/100.00); tft.print(" Mhz\n");
+		tft.print(" using "); tft.print(station/100.00); tft.print(" Mhz");
 		tft.println();
 	#else
-		// scan button non-extant if USE_AVAILABE is false and no need to offset text
-		tft.print("\nTuning into default frequency "); tft.print(FMSTATION/100.00); tft.print(" Mhz\n");
+		tft.print("Using default frequency "); tft.print(FMSTATION/100.00); tft.print(" Mhz");
 		tft.println();
 	#endif
 
@@ -213,20 +206,31 @@ void MyClass::loop()
 		int x = p.y;
 
 		// @TODO just for reference now, delete once direct control buttons are set up
-		if (recordOn) {
-			if((x > REDBUTTON_X) && (x < (REDBUTTON_X + REDBUTTON_W))) {
-				if ((y > REDBUTTON_Y) && (y <= (REDBUTTON_Y + REDBUTTON_H))) {
-					redBtn();
-				}
-			}
-		}
-		else {
-			if((x > GREENBUTTON_X) && (x < (GREENBUTTON_X + GREENBUTTON_W))) {
-				if ((y > GREENBUTTON_Y) && (y <= (GREENBUTTON_Y + GREENBUTTON_H))) {
-					greenBtn();
-				}
-			}
-		}
+		//if (recordOn) {
+			//if((x > REDBUTTON_X) && (x < (REDBUTTON_X + REDBUTTON_W))) {
+				//if ((y > REDBUTTON_Y) && (y <= (REDBUTTON_Y + REDBUTTON_H))) {
+					//redBtn();
+				//}
+			//}
+		//}
+		//else {
+			//if((x > GREENBUTTON_X) && (x < (GREENBUTTON_X + GREENBUTTON_W))) {
+				//if ((y > GREENBUTTON_Y) && (y <= (GREENBUTTON_Y + GREENBUTTON_H))) {
+					//greenBtn();
+				//}
+			//}
+		//}
+		
+		// @TODO react to vol up touch
+		
+		// @TOD react to vol dn touch
+		
+		// @TODO react to prev touch
+		
+		// @TODO react to play/pause touch
+		
+		// @TODO react to next touch
+		
 	}
 
 	#if DEBUG_FM_TX
@@ -247,7 +251,7 @@ void MyClass::loop()
 
 		// currInLevel changes too often by too little, so need a floor delta value
 		if( abs(radio.currInLevel - prevInLevel) > 10 ) {
-			// breakpoint action message: "Curr InLevel: {radio.currInLevel}
+			// breakpoint action message: Curr InLevel: {radio.currInLevel}
 			prevInLevel = radio.currInLevel;
 		}
 	#endif
@@ -269,9 +273,7 @@ void MyClass::loop()
 * @param{uint16_t} hiEnd The high end of the FM band
 * @return{uint16_t} newBroadcast The new frequency to broadcast on
 */
-//int availableChannels(int maxLevel, int defualtFreq, int loEnd, int hiEnd)
 uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd)
-//uint16_t availableChannels(const volatile uint8_t& maxLevel, const volatile uint16_t& defualtFreq, const volatile uint16_t& loEnd, const volatile uint16_t& hiEnd)
 {
 	// a scanned frequency
 	uint16_t freq = 0;
@@ -306,31 +308,7 @@ uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEn
 
 	// sort by low noise level ascending
 	sort(scannedFreqs.begin(), scannedFreqs.end(), sort_pred());
-
 	newBroadcast = scannedFreqs[0].first;
-
-	#if SHOW_SORTED_AVAILABLE
-		// tft.print("\nSorted available frequencies\n");
-		// breakpoint action message: Sorted available frequencies
-		NOP;
-		// reverse print the sorted scanned frequencies because I want the quietest frequency to be last datum printed
-		for(uint16_t i = scannedFreqs.size() -1; i >= 0; i--) {
-			//tft.print("Frequency "); tft.print(scannedFreqs[i].first/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[i].second);
-			//tft.println();
-			// breakpoint action message: Frequency {scannedFreqs[i].first/100.00} Mhz, Noise Level: {scannedFreqs[i].second}
-			NOP;
-		}
-
-		//tft.print("\nFound "); tft.print(scannedFreqs.size()); tft.print(" frequencies with noise less than "); tft.print(maxLevel);
-		//tft.println();
-		// breakpoint action message: Found {scannedFreqs.size()} frequencies with noise less than {maxLevel}
-		NOP;
-
-		//tft.print("Quietest frequency: "); tft.print(newBroadcast/100.00); tft.print(" Mhz, Noise Level: "); tft.print(scannedFreqs[0].second);
-		//tft.println();
-		// breakpoint action message: Quietest frequency: {newBroadcast/100.00} Mhz, Noise Level: {scannedFreqs[0].second}
-		NOP;
-	#endif
 
 	return newBroadcast;
 }

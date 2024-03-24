@@ -312,10 +312,16 @@ uint8_t Adafruit_Si4713::getStatus(void) {
 
 /**
 * Powers up Si4713 in FM Transmission mode with analog inputs and without RDS
-* Refer to AN332.pdf
 */
 void Adafruit_Si4713::powerUp(void) {
-	/* per Sec 5.1 pg 12
+	/* Modified configuration, see Section 12.1, page 253 of AN332.pdf 
+	Not patching or checking revision
+	Not using all default settings
+	Not using interrupts
+	Not using GPO
+	*/
+		   
+	/* Power Up, see Sec 5.1 pg 12
 	CMD = POWER_UP							0x01
 	ARG1 = 0b0001 0010 =					0x12
 	CTS Interrupt Enable Bit 7 = 0			CTS interrupt disabled
@@ -324,47 +330,54 @@ void Adafruit_Si4713::powerUp(void) {
 	Crystal Oscillator Enable Bit 4	= 1		Use crystal oscillator
 	Function[3:0] FM Transmit
 	Bit 3:2 = 0, Bit 1 = 1, Bit 0 = 0		FM transmission enabled
-	*/
-	_i2ccommand[0] = SI4710_CMD_POWER_UP;
-	_i2ccommand[1] = SI4710_CMD_POWER_UP_ARG_1;
-
-	/* per Sec 5.1 pg 13
+	
+	Analog Mode, see Sec 5.1 pg 13
 	Arg 2 = 0b0101 0000 =					0x50
 	Application Setting OPMODE[7:0]			Analog audio inputs (LIN/RIN)
 	Bit 7 = 0, Bit 6 = 1, Bit 5 = 0, Bit 4 = 1, Bit 3:0 = 0
 	*/
+	_i2ccommand[0] = SI4710_CMD_POWER_UP;
+	_i2ccommand[1] = SI4710_CMD_POWER_UP_ARG_1;
 	_i2ccommand[2] = SI4710_CMD_POWER_UP_ARG_2;
     sendCommand(3);
-
-   	// Modified configuration, see Section 12.1, page 253 of AN332.pdf
-
-	// Explicitly set reference clock because leaving REFCLK_PRESCALE at default value
-	// 0x8000 = 32768 (32.768 crystal) see pg 34
-    setProperty(SI4713_PROP_REFCLK_FREQ, 0x8000);
-
-	// Explicitly set input line attenuation and Line level 0x327C see pg  38
+	
+	/* Reference Clock settings */
+	// Reference Clock 0x0201 see pg 34
+	// Reference Clock Prescale 0x0202 see page 35
+	setProperty(SI4713_PROP_REFCLK_FREQ, 0x8000);
+	setProperty(SI4713_PROP_REFCLK_PRESCALE, 0x0001);
+	
+	/*Stereo settings */
+	// Pilot Deviation 0x2102 see page 37
+	// Pilot Frequency 0x2107 see page 40
+	// Enable Stereo Components 0x2100 LMR & PILOT, disable RDS, see page 36
+	setProperty(SI4713_PROP_TX_PILOT_DEVIATION, 0x02A3);
+	setProperty(SI4713_PROP_TX_PILOT_FREQUENCY, 0x4A38);
+	setProperty(SI4713_PROP_TX_COMPONENT_ENABLE, 0x0003);
+	
+	/* Maximize Audio Volume Step 1 see Sec 11.4 pg 251 */
+	// Transmission Line Input Level 0x2104 line attenuation and Line level 0x327C see pg  38 and pg 251
+	// Audio Deviation 0x2101 see page 36
+	// RDS Deviation 0x2103 needs to be set even if not using RDS, see page 37 and 251-252 and Table 54 pg 263
+	// Audio Limiter Release Time 0x2205 see pg 44 and Sec 11.3 pg 251
+	// Preemphasis 0x2106 see page 39
 	setProperty(SI4713_PROP_TX_LINE_LEVEL_INPUT_LEVEL, 0x327C);
-
-	// Set threshold for audio dynamic range control
-	//-15 dB = 0xFFF1 per pg 252
+	setProperty(SI4713_PROP_TX_AUDIO_DEVIATION, 0x1AA9);
+	setProperty(SI4713_PROP_TX_RDS_DEVIATION, 0x00C8);
+	setProperty(SI4713_PROP_TX_LIMITER_RELEASE_TIME, 0x000D);
+	setProperty(SI4713_PROP_TX_PREEMPHASIS, 0x0000);	
+	
+	/* Maximize Audio Volume Step 2 see Sec 11.4 pg 252 */
+	// Audio Compressor Threshold for Audio Dynamic Range Control 0x2201 see page 41 & pg 252 example 2
+	// Audio Compressor Attack Time 0x2202 see page 42 and 252 example 2
+	// Audio Compressor Release Time 0x2203 pg 43 and 252 example 2
+	// Audio Compressor Gain 0x2204 see pg 43 & pg 252 example 2
+	// Audio Compressor Enable 0x2200 see pg 40
 	setProperty(SI4713_PROP_TX_ACOMP_THRESHOLD, 0xFFF1);
-	// Explicitly set response time for audio level transitions from below gain threshold to above compression threshold
-	// 0x0000 = 0.5ms see page 252 & 42
 	setProperty(SI4713_PROP_TX_ATTACK_TIME, 0x0000);
-	// Explicitly set response time for audio level transitions from above compression threshold to blow gain threshold
-	// 0x0004 = 1000 ms see pg 252 & 43
 	setProperty(SI4713_PROP_TX_RELEASE_TIME, 0x0004);
-	// Set the gain for audio dynamic range control
-	// 5db = 0x0005 see pg 43 & pg 252
-    setProperty(SI4713_PROP_TX_ACOMP_GAIN, 0x0005);
-
-	// Explicitly set to ensure North American standard
-	// 0x0000 = 75us see pg 39
-	setProperty(SI4713_PROP_TX_PREEMPHASIS, 0x0000);
-
-	// turn on limiter and AGC
-	// 0x0003 see pg 40
-    setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0003);
+	setProperty(SI4713_PROP_TX_ACOMP_GAIN, 0x0005);
+    setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0003);	
 }
 
 uint8_t Adafruit_Si4713::getRev(void) {
