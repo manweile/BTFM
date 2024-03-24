@@ -1,11 +1,8 @@
 # folders to ignore
-.vs/
-Debug/
-Release/
-__vm/
+.vs/*.*
+Debug/*.*
+Release/*.*
+__vm/*.*
 # file ext to ignore
 *.xml
 *.cppproj
-*.atsln
-*.elf
-.atsuo
