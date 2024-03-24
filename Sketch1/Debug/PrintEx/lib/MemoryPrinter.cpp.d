@@ -1,0 +1,22 @@
+C:\\Users\\Gerald\\AppData\\Local\\Temp\\VMBuilds\\Sketch1\\mega_atmega2560\\Debug\\PrintEx\\lib\\MemoryPrinter.cpp.o: \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\memoryprinter.cpp \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\MemoryPrinter.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\NonStreamingIO.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\Globals.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\arduino.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\binary.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WCharacter.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\WString.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\HardwareSerial.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Stream.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Print.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Printable.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\USBAPI.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino\Arduino.h \
+ c:\users\gerald\appdata\local\arduino15\packages\arduino\hardware\avr\1.8.2\variants\mega\pins_arduino.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\PrintExtension.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\PrintConcat.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\PrintRepeat.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\PrintVariadic.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\TypeTraits.h \
+ c:\users\gerald\appdata\local\temp\vmbuilds\sketch1\mega_atmega2560\debug\src\_micro-api\libraries\printex\src\lib\OStream.h
