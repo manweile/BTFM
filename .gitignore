@@ -2,3 +2,4 @@
 .vs/*.*
 # file ext to ignore
 *.atsln
+.atsuo
