@@ -61,11 +61,11 @@
 	const volatile uint8_t TX_POWER = 115;		// dBuV, 88-115 max
 	const volatile uint8_t BROADCAST_LEVEL = 60;// noise level for broadcasting stations
 #else
-	#define FMSTATION 8770
-	#define MAX_FREQ 10790
-	#define MIN_FREQ 8770
-	#define TX_POWER 115
-	#define BROADCAST_LEVEL 60
+	const uint16_t FMSTATION = 8770;	
+	const uint16_t MAX_FREQ = 10790;	
+	const uint16_t MIN_FREQ = 8770;	
+	const uint8_t TX_POWER = 115;		
+	const uint8_t BROADCAST_LEVEL = 60;
 #endif
 
 /* Mutable Globals */
@@ -104,14 +104,14 @@ RN52 rn52 = RN52(RN52_RX, RN52_TX);
 boolean recordOn = false;
 
 /*Forward  Init Functions */
-uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd);
+//uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd);
+uint16_t availableChannels();
 void drawFrame();
 void redBtn();
 void greenBtn();
 
 void MyClass::setup()
 {
-	volatile uint16_t freq = 0;
 	volatile uint16_t station = FMSTATION;
 
 	// start the cap screen
@@ -144,7 +144,7 @@ void MyClass::setup()
 	}
 
 	#if SCAN_AVAILABLE
-		for (freq = MIN_FREQ; freq <= MAX_FREQ; freq += 20) {
+		for (uint16_t freq = MIN_FREQ; freq <= MAX_FREQ; freq += 20) {
 			radio.readTuneMeasure(freq);
 			radio.readTuneStatus();
 
@@ -158,7 +158,8 @@ void MyClass::setup()
 	// normal operation
 	#if AVAILABLE_FREQS
 		tft.print("Scanning frequencies ...");
-		station = availableChannels(BROADCAST_LEVEL, FMSTATION, MIN_FREQ, MAX_FREQ);
+		//station = availableChannels(BROADCAST_LEVEL, FMSTATION, MIN_FREQ, MAX_FREQ);
+		station = availableChannels();
 		tft.print(" using "); tft.print(station/100.00); tft.print(" Mhz");
 		tft.println();
 	#else
@@ -273,13 +274,19 @@ void MyClass::loop()
 * @param{uint16_t} hiEnd The high end of the FM band
 * @return{uint16_t} newBroadcast The new frequency to broadcast on
 */
-uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd)
+//uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd)
+uint16_t availableChannels()
 {
+	volatile uint16_t FMSTATION = 8770;	// default station 8770 == 87.70 MHz
+	volatile uint16_t MAX_FREQ = 10790;	// upper end of FM band
+	volatile uint16_t MIN_FREQ = 8770;	// lower end of FM band
+	volatile uint8_t BROADCAST_LEVEL = 60;// max noise level for broadcasting stations
+	
 	// a scanned frequency
-	uint16_t freq = 0;
+	uint16_t freq = MIN_FREQ;
 
 	// failsafe return value
-	uint16_t newBroadcast = defualtFreq;
+	uint16_t newBroadcast = FMSTATION;
 
 	// vector of scanned frequencies and their respective current noise levels
 	std::vector<std::pair<uint16_t, uint16_t>> scannedFreqs;
@@ -292,11 +299,11 @@ uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEn
 	};
 
 	// radio tune measure requires .2 Mhz increments
-	for (freq = loEnd; freq <= hiEnd; freq += 20) {
+	for (freq; freq <=  MAX_FREQ; freq += 20) {
 		radio.readTuneMeasure(freq);
 		radio.readTuneStatus();
 
-		if( radio.currNoiseLevel < maxLevel) {
+		if( radio.currNoiseLevel < BROADCAST_LEVEL) {
 			#if SHOW_AVAILABLE
 				// breakpoint action message: Available frequency {freq/100.00} Mhz, Noise Level: {radio.currNoiseLevel}
 				NOP;
