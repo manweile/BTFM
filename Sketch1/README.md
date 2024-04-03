@@ -1,4 +1,4 @@
-# BTFMI
+# BTFM
 
 Bluetooth to FM Transmitter
 
@@ -25,7 +25,7 @@ For audio streaming from Android mobile to FM radio
 
 ## Fritzing
 
-![Fritzing](https://github.com/manweile/BTFMI/blob/text-to-screen/Images/Fritzing-full.png)
+![Fritzing](https://github.com/manweile/BTFM/blob/text-to-screen/Images/Fritzing-full.png)
 
 ## IMPORTANT ARDUINO IDE SETUP
 
@@ -100,15 +100,15 @@ v1.0.0
 To hardware debug the Mega 2560 R3, 4 things are required:
 
 1. Cut the reset-en pads  
-![reset-en](https://github.com/manweile/BTFMI/blob/text-to-screen/Images/reset_en1.jpg)  
+![reset-en](https://github.com/manweile/BTFM/blob/text-to-screen/Images/reset_en1.jpg)  
 ***CUTTING THE reset-en pads REQUIRES USING HARDWARE PROGRAMMING***
 2. JTAG .5mm pitch 2x5 connection  
 Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743  
-![breakout board](https://github.com/manweile/BTFMI/blob/text-to-screen/Images/2743-04.jpg)  
+![breakout board](https://github.com/manweile/BTFM/blob/text-to-screen/Images/2743-04.jpg)  
 **NB this is an SWD breakout, not a JTAG breakout**  
 *The pin outs are different and will have to be mapped!!!*
 3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
-![isp adapter](https://github.com/manweile/BTFMI/blob/text-to-screen/Images/1465-04.jpg)
+![isp adapter](https://github.com/manweile/BTFM/blob/text-to-screen/Images/1465-04.jpg)
 4. Atmel-ICE & cables  
 add link  
 add screenshots here
