@@ -33,10 +33,10 @@ For audio streaming from Android mobile to FM radio
 
 ## Versioning
 
-BTFM uses semantic versioning (Major.Minor.Patch)
-Major: Breaking changes Eg. new hardware incompatible with existing codebase
-Minor: Non-breaking changes Eg. new code functionality, new compatible hardware
-Patch: All other non-breaking changes Eg. Bug fixes, comments
+BTFM uses semantic versioning (Major.Minor.Patch)  
+Major: Breaking changes Eg. new hardware incompatible with existing codebase  
+Minor: Non-breaking changes Eg. new code functionality, new compatible hardware  
+Patch: All other non-breaking changes Eg. Bug fixes, comments  
 
 ### Current Version
 
@@ -44,16 +44,16 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 
 ### Previous Versions
 
-1.5.0 Added 4 channel logic level shifter board.
-1.4.2 Streamlined debugging options.
-1.4.1 Updated RN-52 DFU firmware.
-1.4.0 Added mini USB connection.
-1.3.0 Added inductor for tx antenna and dc coupling capacitors for audio quality.
-1.2.1 Removed Serial debugging statements.
-1.2.0 Added jtag and swd connections for uploading/debugging.
-1.1.1 Tested basic UI capability of capacitive touch screen.
-1.1.0 Added mega shield and capacitive touch shield.
-1.0.0 Basic prototype, mega2560, RN-52, RN-52 speaker output attenuator, Si4713 on breadboard to prove concept is viable.
+1.5.0 Added 4 channel logic level shifter board.  
+1.4.2 Streamlined debugging options.  
+1.4.1 Updated RN-52 DFU firmware.  
+1.4.0 Added mini USB connection.  
+1.3.0 Added inductor for tx antenna and dc coupling capacitors for audio quality.  
+1.2.1 Removed Serial debugging statements.  
+1.2.0 Added jtag and swd connections for uploading/debugging.  
+1.1.1 Tested basic UI capability of capacitive touch screen.  
+1.1.0 Added mega shield and capacitive touch shield.  
+1.0.0 Basic prototype, mega2560, RN-52, RN-52 speaker output attenuator, Si4713 on breadboard to prove concept is viable.  
 
 ## IMPORTANT ARDUINO IDE SETUP
 
