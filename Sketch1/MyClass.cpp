@@ -22,8 +22,6 @@
 #include <Adafruit_Si4713.h>
 
 // Third Party Functions
-// @TODO prob don't need printex
-//#include <PrintEx.h>
 #include <RN52.h>
 
 /* Pin definitions*/
@@ -41,11 +39,11 @@
 #define TFT_DC 9					// @TODO get description
 
 // define keys for #if's
-#define AVAILABLE_FREQS (1)			// debugging : 0 - use defined FMSTATION, normal operation: 1 - scan for & use lowest noise available frequency
-#define DEBUG_FM_FREQ (0)			// debugging - switches to const volatile vars to debug fm frequency acquisition
-#define DEBUG_FM_TX (0)				// debugging - use  action breakpoint to show transmission info
-#define SCAN_AVAILABLE (0)			// debugging - use  action breakpoint to scan for available frequencies and display
-#define SHOW_AVAILABLE (0)			// debugging - use  action breakpoint to show available frequencies
+#define AVAILABLE_FREQS (0)			// sets transmission frequency to use, 1: scan for & use lowest noise available frequency (production), 0: use defined FMSTATION (debugging)
+#define DEBUG_FM_FREQ (0)			// sets how immutable globals are declared, 1: const volatile (debugging), 0: const (production)
+#define DEBUG_FM_TX (0)				// declare volatile vars for debugging fm transmission, use conditional breakpoint to display, 1: declare vars (debugging), 0: do not declare vars (production)
+#define SHOW_AVAILABLE (0)			// shows frequencies found by availableChannels function, use conditional breakpoint to display, 1: show frequencies (debugging), 0: do not show frequencies (production)
+#define SCAN_TX (0)					// scans for transmitting frequencies, use conditional breakpoint to display, 1: scan (debugging), 0: do not scan (production)
 
 // debugging NOP breakpoint, works in conjunction with #if definitions
 #define NOP __asm__ __volatile__ ("nop\n\t")
@@ -104,7 +102,6 @@ RN52 rn52 = RN52(RN52_RX, RN52_TX);
 boolean recordOn = false;
 
 /*Forward  Init Functions */
-//uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd);
 uint16_t availableChannels();
 void drawFrame();
 void redBtn();
@@ -143,7 +140,7 @@ void MyClass::setup()
 		exit(2);
 	}
 
-	#if SCAN_AVAILABLE
+	#if SCAN_TX
 		for (uint16_t freq = MIN_FREQ; freq <= MAX_FREQ; freq += 20) {
 			radio.readTuneMeasure(freq);
 			radio.readTuneStatus();
@@ -158,7 +155,6 @@ void MyClass::setup()
 	// normal operation
 	#if AVAILABLE_FREQS
 		tft.print("Scanning frequencies ...");
-		//station = availableChannels(BROADCAST_LEVEL, FMSTATION, MIN_FREQ, MAX_FREQ);
 		station = availableChannels();
 		tft.print(" using "); tft.print(station/100.00); tft.print(" Mhz");
 		tft.println();
