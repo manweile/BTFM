@@ -27,6 +27,10 @@ For audio streaming from Android mobile to FM radio
 
 ![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/Fritzing-full.png)
 
+## Schematic
+
+![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Docs/Schematics/btfm_schem.pdf)
+
 ## IMPORTANT ARDUINO IDE SETUP
 
 The Arduino AVR Board Library has a known bug in versions greater than 1.82:  
