@@ -29,7 +29,7 @@ For audio streaming from Android mobile to FM radio
 
 ## Schematic
 
-![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Docs/Schematics/btfm_schem.pdf)
+![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/btfm_schem.png)
 
 ## IMPORTANT ARDUINO IDE SETUP
 
@@ -69,12 +69,7 @@ v1.1.0
 
 ### Third party function libraries to install
 
-[PrintEx](https://www.arduino.cc/reference/en/libraries/printex/)  
-v1.2.0
-
-```c++
-#include <PrintEx.h>
-```
+@TODO add RN-52 source
 
 ### Third party hardware libraries to install
 
