@@ -34,7 +34,7 @@
 #define RN52_RX 19
 
 // 2.8" Capacitive touch shield
-// #define SD_CS 4						// @TODO verify description micro sd card chip select, only need pin if storing bmps on micro sd.
+// #define SD_CS 4					// @TODO verify description micro sd card chip select, will only only need pin if storing bmps on micro sd.
 #define TFT_CS 10					// @TODO get description
 #define TFT_DC 9					// @TODO get description
 
