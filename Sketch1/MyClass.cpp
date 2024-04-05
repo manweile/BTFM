@@ -21,25 +21,16 @@
 #include <Adafruit_FT6206.h>
 #include <Adafruit_Si4713.h>
 
-// Third Party Functions
-#include <RN52.h>
-
 /* Pin definitions*/
 // Si4713
 #define RESETPIN 22					// reset Si4713 on Mega 2560
 
-// RN52
-//#define CMD_DATA ??				// @TODO Not sure if I need to drive GPIO 9 low to use RN52 library. May not need at all.
-#define RN52_TX 18					// use uart1 so we are clear of touch screen shield
-#define RN52_RX 19
-
 // 2.8" Capacitive touch shield
-// #define SD_CS 4					// @TODO verify description micro sd card chip select, will only only need pin if storing bmps on micro sd.
-#define TFT_CS 10					// @TODO get description
-#define TFT_DC 9					// @TODO get description
+#define TFT_CS 10					// TFT chip select
+#define TFT_DC 9					// TFT data/command select 
 
 // define keys for #if's
-#define AVAILABLE_FREQS (0)			// sets transmission frequency to use, 1: scan for & use lowest noise available frequency (production), 0: use defined FMSTATION (debugging)
+#define AVAILABLE_FREQS (1)			// sets transmission frequency to use, 1: scan for & use lowest noise available frequency (production), 0: use defined FMSTATION (debugging)
 #define DEBUG_FM_FREQ (0)			// sets how immutable globals are declared, 1: const volatile (debugging), 0: const (production)
 #define DEBUG_FM_TX (0)				// declare volatile vars for debugging fm transmission, use conditional breakpoint to display, 1: declare vars (debugging), 0: do not declare vars (production)
 #define SHOW_AVAILABLE (0)			// shows frequencies found by availableChannels function, use conditional breakpoint to display, 1: show frequencies (debugging), 0: do not show frequencies (production)
@@ -47,9 +38,6 @@
 
 // debugging NOP breakpoint, works in conjunction with #if definitions
 #define NOP __asm__ __volatile__ ("nop\n\t")
-
-// RN52 communications definitions
-#define RN52_BAUD 38400				// per BAL docs, best baud rate for RN52
 
 /* Immutable Globals */
 #if DEBUG_FM_FREQ
@@ -74,38 +62,13 @@ volatile uint8_t prevASQ;
 volatile int8_t prevInLevel;
 #endif
 
-//@TODO test if these can go to consts (presuming continue to use)
-// tft screen drawing definitions
-#define FRAME_X 10
-#define FRAME_Y 10
-#define FRAME_W 100
-#define FRAME_H 50
-
-// @TODO just for reference now, delete once direct control buttons are set up
-#define REDBUTTON_X FRAME_X
-#define REDBUTTON_Y FRAME_Y
-#define REDBUTTON_W (FRAME_W/2)
-#define REDBUTTON_H FRAME_H
-
-#define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
-#define GREENBUTTON_Y FRAME_Y
-#define GREENBUTTON_W (FRAME_W/2)
-#define GREENBUTTON_H FRAME_H
-
 /* Global State */
 Adafruit_FT6206 ts = Adafruit_FT6206();
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
-RN52 rn52 = RN52(RN52_RX, RN52_TX);
-
-// @TODO just for reference now, delete once direct control buttons are set up
-boolean recordOn = false;
 
 /*Forward  Init Functions */
 uint16_t availableChannels();
-void drawFrame();
-void redBtn();
-void greenBtn();
 
 void MyClass::setup()
 {
@@ -132,6 +95,8 @@ void MyClass::setup()
 
 	// reset for screen space saving
 	tft.setTextSize(1);
+	
+	tft.println("v1.5.1");
 
 	// begin with address 0x63 (CS high default)
 	if (!radio.begin()) {
@@ -179,57 +144,10 @@ void MyClass::setup()
 		prevASQ = radio.currASQ;
 		prevInLevel = radio.currInLevel;
 	#endif
-
-	// @TODO set up buttons
-	//			vol up
-	//	prev	play/pause	next
-	//			vol dn
-
-	// @TODO just for reference now, delete once direct control buttons are set up
-	// redBtn();
 }
 
 void MyClass::loop()
 {
-	// react to cap screen use input actions
-	if (ts.touched()) {
-		// Retrieve a point
-		TS_Point p = ts.getPoint();
-
-		// rotate coordinate system & flip it around to match the screen.
-		p.x = map(p.x, 0, 240, 240, 0);
-		p.y = map(p.y, 0, 320, 320, 0);
-		int y = tft.height() - p.x;
-		int x = p.y;
-
-		// @TODO just for reference now, delete once direct control buttons are set up
-		//if (recordOn) {
-			//if((x > REDBUTTON_X) && (x < (REDBUTTON_X + REDBUTTON_W))) {
-				//if ((y > REDBUTTON_Y) && (y <= (REDBUTTON_Y + REDBUTTON_H))) {
-					//redBtn();
-				//}
-			//}
-		//}
-		//else {
-			//if((x > GREENBUTTON_X) && (x < (GREENBUTTON_X + GREENBUTTON_W))) {
-				//if ((y > GREENBUTTON_Y) && (y <= (GREENBUTTON_Y + GREENBUTTON_H))) {
-					//greenBtn();
-				//}
-			//}
-		//}
-		
-		// @TODO react to vol up touch
-		
-		// @TOD react to vol dn touch
-		
-		// @TODO react to prev touch
-		
-		// @TODO react to play/pause touch
-		
-		// @TODO react to next touch
-		
-	}
-
 	#if DEBUG_FM_TX
 		// for changes in antenna capacitance
 		radio.readTuneStatus();
@@ -264,19 +182,14 @@ void MyClass::loop()
 
 /**
 * Scans FM band for stations with lowest noise level frequency stations and returns that frequency for broadcast use
-* @param{uint8_t} maxLevel The maximum allowable noise level for an unused frequency
-* @param{uint16_t} defualtFreq The failsafe defualt frequency
-* @param{uint16_t} loEnd The low end of the FM band
-* @param{uint16_t} hiEnd The high end of the FM band
 * @return{uint16_t} newBroadcast The new frequency to broadcast on
 */
-//uint16_t availableChannels(uint8_t maxLevel, uint16_t defualtFreq, uint16_t loEnd, uint16_t hiEnd)
 uint16_t availableChannels()
 {
-	volatile uint16_t FMSTATION = 8770;	// default station 8770 == 87.70 MHz
-	volatile uint16_t MAX_FREQ = 10790;	// upper end of FM band
-	volatile uint16_t MIN_FREQ = 8770;	// lower end of FM band
-	volatile uint8_t BROADCAST_LEVEL = 60;// max noise level for broadcasting stations
+	volatile uint16_t FMSTATION = 8770;		// default station 8770 == 87.70 MHz
+	volatile uint16_t MAX_FREQ = 10790;		// upper end of FM band
+	volatile uint16_t MIN_FREQ = 8770;		// lower end of FM band
+	volatile uint8_t BROADCAST_LEVEL = 60;	// max noise level for broadcasting stations
 	
 	// a scanned frequency
 	uint16_t freq = MIN_FREQ;
@@ -316,42 +229,4 @@ uint16_t availableChannels()
 	return newBroadcast;
 }
 
-/**
-* Capacitive Touch Functions
-*/
-
-// @TODO function header
-void drawFrame()
-{
-	tft.drawRect(FRAME_X, FRAME_Y, FRAME_W, FRAME_H, ILI9341_BLACK);
-}
-
-
-// @TODO just for reference now, delete once direct control buttons are set up
-void redBtn()
-{
-	tft.fillRect(REDBUTTON_X, REDBUTTON_Y, REDBUTTON_W, REDBUTTON_H, ILI9341_RED);
-	tft.fillRect(GREENBUTTON_X, GREENBUTTON_Y, GREENBUTTON_W, GREENBUTTON_H, ILI9341_BLUE);
-	drawFrame();
-	tft.setCursor(GREENBUTTON_X + 6 , GREENBUTTON_Y + (GREENBUTTON_H/2));
-	tft.setTextColor(ILI9341_WHITE);
-	tft.setTextSize(1);
-	tft.println("ON");
-	recordOn = false;
-}
-
-// @TODO just for reference now, delete once direct control buttons are set up
-void greenBtn()
-{
-	tft.fillRect(GREENBUTTON_X, GREENBUTTON_Y, GREENBUTTON_W, GREENBUTTON_H, ILI9341_GREEN);
-	tft.fillRect(REDBUTTON_X, REDBUTTON_Y, REDBUTTON_W, REDBUTTON_H, ILI9341_BLUE);
-	drawFrame();
-	tft.setCursor(REDBUTTON_X + 6 , REDBUTTON_Y + (REDBUTTON_H/2));
-	tft.setTextColor(ILI9341_WHITE);
-	tft.setTextSize(1);
-	tft.println("OFF");
-	recordOn = true;
-}
-
 MyClass myClass;
-
