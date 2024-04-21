@@ -55,6 +55,12 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 1.1.0 Added mega shield and capacitive touch shield.  
 1.0.0 Basic prototype, mega2560, RN-52, RN-52 speaker output attenuator, Si4713 on breadboard to prove concept is viable.  
 
+### Planned Versions
+
+1.5.2 Add BAL RN-52 Library and 2nd logic level shifter breakout to enable hardware use of library
+1.5.3 Add touch screen UI buttons to use BAL RN-52 Library
+1.5.4 Add song metadata display to UI
+
 ## IMPORTANT ARDUINO IDE SETUP
 
 The Arduino AVR Board Library has a known bug in versions greater than 1.82:  
