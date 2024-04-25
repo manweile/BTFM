@@ -2,7 +2,13 @@
 
 Bluetooth to FM Transmitter
 
-For audio streaming from Android mobile to FM radio
+For audio streaming from Android mobile to FM radio.
+
+I started this project when I own a vehicle that did not have bluetooth, and the cassette player AND cd player died.
+The bare bones proof of concept prototype worked - Arduino Mega 2560, RN-52 board, attenuator circuit, and Si4713 board.
+Of course, you know what that meant - I promptly went and bought a new vehicle with bluetooth.
+Fast forward a few years, and I found myself with a RV that had a fluky bluetooth stereo - so I dusted everything off.
+Of course, during the hiatus, tech advanced. I could now hardware debug reasonably painlessly.
 
 ## Bill of Materials
 
@@ -97,10 +103,6 @@ v1.1.0
 #include <vector>
 ```
 
-### Third party function libraries to install
-
-@TODO add RN-52 source
-
 ### Third party hardware libraries to install
 
 [Adafruit_FT6206](https://www.arduino.cc/reference/en/libraries/adafruit-ft6206-library/)  
@@ -153,8 +155,6 @@ Atmel-ICE is a hardware programmer/debugger.
 IPSUM LOREM more info
 
 Microchip Studio 7 & Mega 2560 ICSP upload details
-
-1. follow instructions on <https://mevihub.com/programming-arduino-with-atmel-ice/>
 
 IPSUM LOREM MS7 Mega 2560 JTAG debugging details
 
@@ -288,23 +288,29 @@ Now that you can actually power up the RN-52 and send it into command mode, let'
 4. Your device is now ready to make a connection. Rather than connect over Bluetooth, the connection will be made over the serial UART.
 5. Open a TeraTerm terminal window on the port (COM 9) your RN-52 has been assigned (115200 Baud, 8,N,1).
 6. With the terminal open and connected to the RN-52, flip the CMD Mode switch to the ON position (GPIO9 shorted to GND). You should now see CMD appear in your terminal.  
-screenshot 1 here
+screenshot here
 7. Turn on echo by typing + and hitting return.  
-Screenshot 2 here
-8. Enable AVRCP. By default, the RN-52 does not have the AVRCP enabled. This is part of the extended features. When you type D to see the basic settings, you'll notice a line that says ExtFeatures=XX, where XX is some hex value.  
-screenshot 3 & 4 here
-9. Notice that bit 0 is the bit we need to enable to activate the AVRCP button functionality. Send the command S%,07(/r) to enable this bit while leaving the other two bits enabled.  
-screenshot 5 here
-10. Then follow it up with a reboot -- R,1(/r), wait until you see reboot,  
-Screenshot 6 here  
-then flip the CMD Mode switch back to Off.  
-Hold down the power reset button for approx 1 second. You should now have AVRCP enabled. Flip the CMD Mode switch back to on (and turn echo on as well).  
-Screenshot 7 here
-11. Type D to double check the settings.  
-Screenshot 8 & 9 here
-12. To exit command mode, simply flip the switch back to the OFF position. You will see END appear in the window.  
-Screenshot 10 here
-13. Close TeraTerm.
+Screenshot here
+8. Enable AVRCP (bit 0), enable reconnect on power-on (bit 1), discoverable on start-up (bit 2) , and enable track change event (bit 12): S%, 1007  
+screenshot here
+9. Set routing to A2DP profile: S|, 0000  
+screenshot here
+10. Set discovery mask to A2DP: SD, 04  
+screenshot here  
+11. Set connection mask to A2DP: SK, 04  
+screenshot here
+12. Set speaker gain level: SS, 0F  
+screenshot here
+13. Reboot: R,1(/r), wait until you see reboot, then flip the CMD Mode switch back to Off.  
+Screenshot here  
+14. Hold down the power reset button for approx 1 second.
+15. Flip the CMD Mode switch back to on.
+16. Turn echo on as well  
+17. Type D to double check the settings.  
+Screenshot here
+18. To exit command mode, simply flip the switch back to the OFF position. You will see END appear in the window.  
+Screenshot here
+19. Close TeraTerm.
 
 #### RN-52 Status LED Functions
 
