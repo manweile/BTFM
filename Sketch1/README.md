@@ -228,7 +228,8 @@ You will need a way to communicate to the module and send commands. This will be
 #### Discovering your device
 
 1. Connect FTDI to your computer with usb mini-b cable  
-*If this is the first time you've plugged in a device of this nature into your computer, you may need to install the drivers. Follow this guide: [FTDI Driver Installation Guide](https://learn.sparkfun.com/tutorials/how-to-install-ftdi-drivers/all)*
+*If this is the first time you've plugged in a device of this nature into your computer, you may need to install the drivers.  
+Follow this guide: [FTDI Driver Installation Guide](https://learn.sparkfun.com/tutorials/how-to-install-ftdi-drivers/all)*
 2. Open Windows Device Manager
 3. Once you've got Device Manger open, expand the Ports tab
 4. You should see "USB Serial Port (COM 9)"
@@ -237,7 +238,8 @@ You will need a way to communicate to the module and send commands. This will be
 7. Select Driver tab
 8. The driver provider should be FTDI
 
-*If you do have multiple devices and are not sure which device is the one you just plugged in, unplug it, watch for whichever COM port disappears, and then plug it back in. The COM port should reappear letting you know that's the device you're looking for.*
+*If you do have multiple devices and are not sure which device is the one you just plugged in, unplug it, watch for whichever COM port disappears, and then plug it back in.  
+The COM port should reappear, letting you know that's the device you're looking for.*
 
 #### TeraTerm
 
@@ -249,11 +251,10 @@ Once you have TeraTerm installed, open up it up.
 
 You should initially be presented with a "TeraTerm: New connection" pop-up within the program. Here, you can select which serial port you'd like to open up.
 
-*Select the "Serial" radio button.*
-
+*Select the "Serial" radio button.*  
 Then select your port from the drop-down menu.
 
-*Select COM9: USB Serial Port*
+*Select COM9: USB Serial Port*  
 If this window doesn't open when you start TeraTerm, you can get here by going to File > New connection.
 
 That'll open up the port. TeraTerm defaults to setting the baud rate at 9600 bps (8-N-1).  
