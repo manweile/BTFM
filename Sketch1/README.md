@@ -316,7 +316,7 @@ screenshot 11 here
 
 ### Adafruit Stereo FM Transmitter with RDS/RDBS Breakout - Si4713
 
-@TODO IPSUM LOREM  Si4713 info
+@TODO IPSUM LOREM  add Si4713 info
 
 @TODO Add datasheet links
 
