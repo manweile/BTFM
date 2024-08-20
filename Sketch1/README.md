@@ -127,7 +127,7 @@ Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743
 **NB this is an SWD breakout, not a JTAG breakout**  
 *The pin outs are different and will have to be mapped!!!*
 3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
-![isp adapter](https://github.com/manweile/BTFM/blob/main/Skectch1/Images/1465-04.jpg)
+![isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
 4. Atmel-ICE & cables  
 add link  
 add screenshots here
@@ -277,22 +277,13 @@ Now that you can actually power up the RN-52 and send it into command mode, let'
 4. Your device is now ready to make a connection. Rather than connect over Bluetooth, the connection will be made over the serial UART.
 5. Open a TeraTerm terminal window on the port (COM 9) your RN-52 has been assigned (115200 Baud, 8,N,1).
 6. With the terminal open and connected to the RN-52, flip the CMD Mode switch to the ON position (GPIO9 shorted to GND). You should now see CMD appear in your terminal.  
-screenshot 1 here
 7. Turn on echo by typing + and hitting return.  
-Screenshot 2 here
 8. Enable AVRCP. By default, the RN-52 does not have the AVRCP enabled. This is part of the extended features. When you type D to see the basic settings, you'll notice a line that says ExtFeatures=XX, where XX is some hex value.  
-screenshot 3 & 4 here
 9. Notice that bit 0 is the bit we need to enable to activate the AVRCP button functionality. Send the command S%,07(/r) to enable this bit while leaving the other two bits enabled.  
-screenshot 5 here
-10. Then follow it up with a reboot -- R,1(/r), wait until you see reboot,  
-Screenshot 6 here  
-then flip the CMD Mode switch back to Off.  
+10. Then follow it up with a reboot -- R,1(/r), wait until you see reboot, then flip the CMD Mode switch back to Off.  
 Hold down the power reset button for approx 1 second. You should now have AVRCP enabled. Flip the CMD Mode switch back to on (and turn echo on as well).  
-Screenshot 7 here
 11. Type D to double check the settings.  
-Screenshot 8 & 9 here
 12. To exit command mode, simply flip the switch back to the OFF position. You will see END appear in the window.  
-Screenshot 10 here
 13. Close TeraTerm.
 
 #### RN-52 Status LED Functions
@@ -309,7 +300,6 @@ Screenshot 10 here
 2. Open the Bluetooth tab on your Android device
 3. Wait for scan to finish.
 4. You should see an available device that matches the BTName from the "D" command  
-screenshot 11 here
 5. Select it for pairing.
 6. If pairing was successful, the green led will stop flashing and the red led will start flashing.
 7. You can now start streaming music.
