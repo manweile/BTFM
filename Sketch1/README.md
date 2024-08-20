@@ -10,7 +10,7 @@ For audio streaming from Android mobile to FM radio
 | --------- | --------- | --------- | ----------- |
 | Arduino Mega2560 R3 | 1 | [Arduino Mega 2560 R3](https://www.sparkfun.com/products/11061) | DEV-11061 |
 | Atmel-ICE Basic     | 1 | [Atmel-ICE Basic](https://www.digikey.ca/en/products/detail/microchip-technology/ATATMEL-ICE-BASIC/4753381?utm_adgroup=&utm_source=google&utm_medium=cpc&utm_campaign=PMax%20Product_Low%20ROAS%20Categories&utm_term=&productid=4753381&utm_content=&utm_id=go_cmp-20291741422_adg-_ad-__dev-c_ext-_prd-4753381_sig-EAIaIQobChMIvM6727jdgwMV7zutBh3bswzIEAQYASABEgI7UPD_BwE&gad_source=1&gclid=EAIaIQobChMIvM6727jdgwMV7zutBh3bswzIEAQYASABEgI7UPD_BwE) | ATATMEL-ICE-BASIC-ND |
-| 2.8" TFT Touch Shield for Arduino with Capacitve Touch and microSd | 1 | [2.8" TFT Touch Shield](https://www.adafruit.com/product/1947) | 1947 |
+| 2.8" TFT Touch Shield for Arduino with Capacitive Touch and microSd | 1 | [2.8" TFT Touch Shield](https://www.adafruit.com/product/1947) | 1947 |
 | Adafruit Stereo FM Transmitter with RDS/RDBS Breakout - Si4713 | 1 | [Adafruit Stereo FM Transmitter](https://www.adafruit.com/product/1958) | 1958 |
 | Sparkfun  Audio Bluetooth Breakout - RN-52 | 1 | [Sparkfun Audio Bluetooth Breakout](https://learn.sparkfun.com/tutorials/rn-52-bluetooth-hookup-guide#overview) | WRL-12849 |
 | Sparkfun FTDI Basic Breakout - 3.3V | 1 | [Sparkfun FTDI Basic Breakout](https://www.sparkfun.com/products/9873?_gl=1*173untz*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTI3MzMxNC4xNC4xLjE3MDUyNzQyMzcuNjAuMC4w&_ga=2.171073504.1571879566.1705185864-1752891384.1701105065) | DEV-09873 |
@@ -91,10 +91,6 @@ v1.1.0
 #include <vector>
 ```
 
-### Third party function libraries to install
-
-@TODO add RN-52 source
-
 ### Third party hardware libraries to install
 
 [Adafruit_FT6206](https://www.arduino.cc/reference/en/libraries/adafruit-ft6206-library/)  
@@ -144,13 +140,11 @@ add link here
 
 Atmel-ICE is a hardware programmer/debugger.
 
-IPSUM LOREM more info
+IPSUM LOREM more Atmel-ICE info
 
-Microchip Studio 7 & Mega 2560 ICSP upload details
+IPSUM LOREM  Microchip Studio 7 & Mega 2560 ICSP upload details
 
-1. follow instructions on <https://mevihub.com/programming-arduino-with-atmel-ice/>
-
-IPSUM LOREM MS7 Mega 2560 JTAG debugging details
+IPSUM LOREM Microchip Studio 7 & Mega 2560 JTAG debugging details
 
 ### Speaker Level to Line Level
 
@@ -182,7 +176,7 @@ The Si4713 can take a max of 636 mV on line level inputs (this is default settin
 
 The RN-52 output speaker level needs to be attenuated from 750 mV to less than or equal to 636 mV.
 
-schematic or fritzing diagram here
+@TODO schematic or fritzing diagram here
 
 IPSUM LOREM attenuation circuit description
 
@@ -219,7 +213,7 @@ In order to enter command mode, GPIO9 must be pulled LOW (to GND). Refer to frit
 
 ### Firmware Upgrade
 
-IPSUM LOPREM
+IPSUM LOREM
 
 ### UART
 
@@ -322,7 +316,7 @@ screenshot 11 here
 
 ### Adafruit Stereo FM Transmitter with RDS/RDBS Breakout - Si4713
 
-@TODO IPSUM LOREM
+@TODO IPSUM LOREM  Si4713 info
 
 @TODO Add datasheet links
 
@@ -332,6 +326,6 @@ The antenna specs in data sheets are conflicting and confusing.
 Currently using a 22 AWG wire in 18 x 13 cm single wire square loop configuration
 If Equation 30 of AN710 datasheet is correct application for my antenna, I have an inductance of 666 nH.
 
-### 2.8" TFT Touch Shield for Arduino with Capacitve Touch and microSd
+### 2.8" TFT Touch Shield for Arduino with Capacitive Touch and microSd
 
-@TODO IPSUM LOREM
+@TODO IPSUM LOREM TFT touch shield info
