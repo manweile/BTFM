@@ -23,11 +23,36 @@ For audio streaming from Android mobile to FM radio
 | 68 kOhm resistor | 2 | [Resistor Kit](https://www.sparkfun.com/products/10969) | COM-10969 |
 | 18 kOhm resistor | 2 | [Resistor Kit](https://www.sparkfun.com/products/10969) |  COM-10969 |
 
-## Fritzing
+## Software Tools
+
+### Programming
+
+![AVRDUDE](https://github.com/avrdudes/avrdude/)  
+![AVRDUDESS - A GUI for AVRDUDE](https://github.com/ZakKemble/AVRDUDESS?tab=readme-ov-file)
+
+### CAD
+
+![Fritzing](https://fritzing.org/)
+
+### IDE
+
+![Arduino](https://docs.arduino.cc/software/ide/)
+
+![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
+
+### IDE Extension
+
+![Visual Micro](https://www.visualmicro.com/)
+![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
+
+## Diagrams
+
+### Fritzing
 
 ![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/Fritzing-full.png)
 
-## Schematic
+### Schematic
 
 ![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/btfm_schem.png)
 
@@ -129,18 +154,18 @@ Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743
 3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
 ![isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
 4. Atmel-ICE & cables  
-add link  
-add screenshots here
+![Atmel-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)
 5. Microchip Studio 7  
-add link here
+![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
 6. Visual Micro  
-add link here
+![Visual Micro](https://www.visualmicro.com/)
+![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
 
 ### Atmel-ICE Basic
 
 Atmel-ICE is a hardware programmer/debugger.
-
-IPSUM LOREM more Atmel-ICE info
+![Atmel-ICE user guide](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/UserGuides/Atmel-ICE_UserGuide.pdf)
 
 IPSUM LOREM  Microchip Studio 7 & Mega 2560 ICSP upload details
 
