@@ -139,38 +139,6 @@ v1.0.0
 
 ## Hardware
 
-### Arduino Mega 2560 R3 Hardware Debugging
-
-To hardware debug the Mega 2560 R3, 4 things are required:
-
-1. Cut the reset-en pads  
-![reset-en](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/reset_en1.jpg)  
-***CUTTING THE reset-en pads REQUIRES USING HARDWARE PROGRAMMING***
-2. JTAG .5mm pitch 2x5 connection  
-Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743  
-![breakout board](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/2743-04.jpg)  
-**NB this is an SWD breakout, not a JTAG breakout**  
-*The pin outs are different and will have to be mapped!!!*
-3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
-![isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
-4. Atmel-ICE & cables  
-![Atmel-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)
-5. Microchip Studio 7  
-![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
-![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
-6. Visual Micro  
-![Visual Micro](https://www.visualmicro.com/)
-![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
-
-### Atmel-ICE Basic
-
-Atmel-ICE is a hardware programmer/debugger.
-![Atmel-ICE user guide](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/UserGuides/Atmel-ICE_UserGuide.pdf)
-
-IPSUM LOREM  Microchip Studio 7 & Mega 2560 ICSP upload details
-
-IPSUM LOREM Microchip Studio 7 & Mega 2560 JTAG debugging details
-
 ### Speaker Level to Line Level
 
 The RN-52 audio output circuitry consists of a balanced differential speaker output preceded by a gain stage and a class AB amplifier.  
@@ -203,7 +171,7 @@ The RN-52 output speaker level needs to be attenuated from 750 mV to less than o
 
 @TODO schematic or fritzing diagram here
 
-IPSUM LOREM attenuation circuit description
+@TODO IPSUM LOREM attenuation circuit description
 
 ### Sparkfun  Audio Bluetooth Breakout - RN-52
 
@@ -238,7 +206,7 @@ In order to enter command mode, GPIO9 must be pulled LOW (to GND). Refer to frit
 
 ### Firmware Upgrade
 
-IPSUM LOREM
+@TODO IPSUM LOREM
 
 ### UART
 
@@ -343,4 +311,36 @@ If Equation 30 of AN710 datasheet is correct application for my antenna, I have 
 
 ### 2.8" TFT Touch Shield for Arduino with Capacitive Touch and microSd
 
-@TODO IPSUM LOREM TFT touch shield info
+@TODO IPSUM LOREM TFT touch shield information
+
+### Arduino Mega 2560 R3 Hardware Programming & Debugging
+
+To hardware program & debug the Mega 2560 R3, 4 things are required:
+
+1. Cut the reset-en pads  
+![reset-en](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/reset_en1.jpg)  
+***CUTTING THE reset-en pads REQUIRES USING HARDWARE PROGRAMMING***
+2. JTAG .5mm pitch 2x5 connection  
+Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743  
+![breakout board](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/2743-04.jpg)  
+**NB this is an SWD breakout, not a JTAG breakout**  
+*The pin outs are different and will have to be mapped!!!*
+3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
+![isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
+4. Atmel-ICE & cables  
+![Atmel-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)
+5. Microchip Studio 7  
+![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
+6. Visual Micro  
+![Visual Micro](https://www.visualmicro.com/)
+![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
+
+### Atmel-ICE Basic
+
+Atmel-ICE is a hardware programmer/debugger.
+![Atmel-ICE user guide](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/UserGuides/Atmel-ICE_UserGuide.pdf)
+
+@TODO IPSUM LOREM  Microchip Studio 7 & Mega 2560 ICSP upload details
+
+@TODO IPSUM LOREM Microchip Studio 7 & Mega 2560 JTAG debugging details
