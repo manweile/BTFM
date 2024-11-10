@@ -86,16 +86,23 @@
 #define SI4713_PROP_TX_RDS_PS_AF 0x2C06
 #define SI4713_PROP_TX_RDS_FIFO_SIZE 0x2C07
 
-
 /* REGISTERS */
-
 
 class Adafruit_Si4713  {
  public:
+  /**
+   * @brief Construct a new Adafruit_Si4713 object.
+   * @details ipsum lorem.
+   * @param [in] int8_t rstpin 
+   */
   Adafruit_Si4713(int8_t rstpin = -1);
   boolean begin(uint8_t addr = SI4710_ADDR1);
   void reset();
 
+  /**
+   * @brief Powers up Si4713.
+   * @details  Sets FM Transmission mode with analog inputs and without RDS.
+   */
   void powerUp(void);
   void configure(void);
   uint8_t getRev(void);
@@ -106,6 +113,13 @@ class Adafruit_Si4713  {
   void readTuneMeasure(uint16_t freq);
   void setTXpower(uint8_t pwr, uint8_t antcap = 0);
   void readASQ(void);
+
+  /**
+   * @brief Set the Property object.
+   * @details ipsum lorem.
+   * @param [in] uint16_t p 
+   * @param [in] uint16_t v 
+   */
   void setProperty(uint16_t p, uint16_t v);
 
   // RDS stuff
@@ -117,12 +131,16 @@ class Adafruit_Si4713  {
   uint8_t currdBuV, currAntCap, currNoiseLevel, currASQ;
   int8_t currInLevel;
 
-
   void setGPIO(uint8_t x);
   void setGPIOctrl(uint8_t x);
 
  private:
 
+  /**
+   * @brief ipsum lorem.
+   * @details ipsum lorem.
+   * @param [in] uint8_t len 
+   */
   void sendCommand(uint8_t len);
 
   int8_t _rst;
