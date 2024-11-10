@@ -21,7 +21,6 @@ Adafruit_Si4713::Adafruit_Si4713(int8_t resetpin) {
   _rst = resetpin;
 }
 
-
 boolean Adafruit_Si4713::begin(uint8_t addr) {
   Wire.begin();
 
@@ -33,9 +32,6 @@ boolean Adafruit_Si4713::begin(uint8_t addr) {
 
   // check for Si4713
   if (getRev() != 13) return false;
-
-
-
   return true;
 }
 
@@ -50,58 +46,65 @@ void Adafruit_Si4713::reset() {
   }
 }
 
-
 //////////////////////////////////////////////////////
 
 void Adafruit_Si4713::setProperty(uint16_t property, uint16_t value) {
-    _i2ccommand[0] = SI4710_CMD_SET_PROPERTY;
-    _i2ccommand[1] = 0;
-    _i2ccommand[2] = property >> 8;
-    _i2ccommand[3] = property & 0xFF;
-    _i2ccommand[4] = value >> 8;
-    _i2ccommand[5] = value & 0xFF;
-    sendCommand(6);
+  _i2ccommand[0] = SI4710_CMD_SET_PROPERTY;
+  _i2ccommand[1] = 0;
+  _i2ccommand[2] = property >> 8;
+  _i2ccommand[3] = property & 0xFF;
+  _i2ccommand[4] = value >> 8;
+  _i2ccommand[5] = value & 0xFF;
+  sendCommand(6);
 
-#ifdef SI4713_CMD_DEBUG
-    Serial.print("Set Prop "); Serial.print(property);
-    Serial.print(" = "); Serial.println(value);
-#endif
+  #ifdef SI4713_CMD_DEBUG
+      Serial.print("Set Prop "); Serial.print(property);
+      Serial.print(" = "); Serial.println(value);
+  #endif
 }
 
 void Adafruit_Si4713::sendCommand(uint8_t len) {
-#ifdef SI4713_CMD_DEBUG
-  Serial.print("\n*** Command:");
-#endif
+  #ifdef SI4713_CMD_DEBUG
+    Serial.print("\n*** Command:");
+  #endif
+    
   Wire.beginTransmission(_i2caddr);
-  for (uint8_t i=0; i<len; i++) {
-#ifdef SI4713_CMD_DEBUG
-    Serial.print(" 0x"); Serial.print(_i2ccommand[i], HEX);
-#endif
+
+  for (uint8_t i = 0; i < len; i++) {
+    #ifdef SI4713_CMD_DEBUG
+        Serial.print(" 0x"); Serial.print(_i2ccommand[i], HEX);
+    #endif
     Wire.write(_i2ccommand[i]);
   }
   Wire.endTransmission();
-#ifdef SI4713_CMD_DEBUG
-  Serial.println();
-#endif
-    // Wait for status CTS bit
+  
+  #ifdef SI4713_CMD_DEBUG
+    Serial.println();
+  #endif
+  
+  // Wait for status CTS bit
   uint8_t status = 0, timeout = 100;
-    while (! (status & SI4710_STATUS_CTS)) {
-      Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)1);
-      while ((Wire.available() < 1) & (timeout != 0)) {
-        //Serial.print('.');
-        delay(1);
-	timeout--;
 
-      }
-      if (timeout == 0)  {
-	status = 0;
-	return;
-      }
-      status = Wire.read();
-#ifdef SI4713_CMD_DEBUG
-      Serial.print("status: "); Serial.println(status, HEX);
-#endif
+  while (! (status & SI4710_STATUS_CTS)) {
+    Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)1);
+    
+    while ((Wire.available() < 1) & (timeout != 0)) {
+      //Serial.print('.');
+      delay(1);
+      timeout--;
     }
+
+    if (timeout == 0)  {
+      status = 0;
+      return;
+    }
+
+    status = Wire.read();
+
+    #ifdef SI4713_CMD_DEBUG
+      Serial.print("status: "); Serial.println(status, HEX);
+    #endif
+  }
 }
 
 void Adafruit_Si4713::tuneFM(uint16_t freqKHz) {
@@ -138,22 +141,21 @@ void Adafruit_Si4713::readASQ(void) {
   currInLevel =  Wire.read();
 }
 
-
 void Adafruit_Si4713::readTuneStatus(void) {
   _i2ccommand[0] = SI4710_CMD_TX_TUNE_STATUS;
   _i2ccommand[1] = 0x1; // INTACK
   sendCommand(2);
 
-   Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)8);
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)8);
 
-    Wire.read(); Wire.read(); // status and resp1
-    currFreq = Wire.read();   // resp2
-    currFreq <<= 8;
-    currFreq |=  Wire.read(); // resp3
-    Wire.read();              // resp4
-    currdBuV =  Wire.read();
-    currAntCap = Wire.read();
-    currNoiseLevel =  Wire.read();
+  Wire.read(); Wire.read(); // status and resp1
+  currFreq = Wire.read();   // resp2
+  currFreq <<= 8;
+  currFreq |=  Wire.read(); // resp3
+  Wire.read();              // resp4
+  currdBuV =  Wire.read();
+  currAntCap = Wire.read();
+  currNoiseLevel =  Wire.read();
 }
 
 
@@ -226,9 +228,11 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
     memcpy(_i2ccommand+4, s, min(4, strlen(s)));
     s+=4;
     _i2ccommand[8] = 0;
+
     //Serial.print("Set buff #"); Serial.print(i);
     //char *slot = (char *)( _i2ccommand+4);
     //Serial.print(" to '"); Serial.print(slot); Serial.println("'");
+
     _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
     if (i == 0)
       _i2ccommand[1] = 0x06;
@@ -240,37 +244,38 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
     sendCommand(8);
   }
 
-
   /*
   // set time
-   _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
-   _i2ccommand[1] = 0x84;
-   _i2ccommand[2] = 0x40; // RTC
-   _i2ccommand[3] = 01;
-   _i2ccommand[4] = 0xA7;
-   _i2ccommand[5] = 0x0B;
-   _i2ccommand[6] = 0x2D;
-   _i2ccommand[7] = 0x6C;
-   sendCommand(8);
+  _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
+  _i2ccommand[1] = 0x84;
+  _i2ccommand[2] = 0x40; // RTC
+  _i2ccommand[3] = 01;
+  _i2ccommand[4] = 0xA7;
+  _i2ccommand[5] = 0x0B;
+  _i2ccommand[6] = 0x2D;
+  _i2ccommand[7] = 0x6C;
+  sendCommand(8);
 
-   Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
-   Wire.read(); // status
-   Serial.print("FIFO overflow: 0x"); Serial.println(Wire.read(), HEX);
-   Serial.print("Circ avail: "); Serial.println(Wire.read());
-   Serial.print("Circ used: "); Serial.println(Wire.read());
-   Serial.print("FIFO avail: "); Serial.println(Wire.read());
-   Serial.print("FIFO used: "); Serial.println(Wire.read());
-   */
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
+  Wire.read(); // status
+  Serial.print("FIFO overflow: 0x"); Serial.println(Wire.read(), HEX);
+  Serial.print("Circ avail: "); Serial.println(Wire.read());
+  Serial.print("Circ used: "); Serial.println(Wire.read());
+  Serial.print("FIFO avail: "); Serial.println(Wire.read());
+  Serial.print("FIFO used: "); Serial.println(Wire.read());
+  */
 
-   // enable!
+  // enable!
   //Serial.println("Enable RDS");
   setProperty(SI4713_PROP_TX_COMPONENT_ENABLE, 0x0007); // stereo, pilot+rds
+  
   /*
   // wait till ready
   while (getStatus() != 0x80) {
     Serial.println(getStatus(), HEX);
     delay(100);
   }
+  
   delay(500);
   _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
   _i2ccommand[1] = 0x01; // clear RDSINT
@@ -280,39 +285,37 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
   _i2ccommand[5] = 0x0;
   _i2ccommand[6] = 0x0;
   _i2ccommand[7] = 0x0;
-   sendCommand(8);
-   // get reply!
-   Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
-   for (uint8_t x=0; x<7; x++) {
-     Wire.read();
-   }
-   */
-   /*   or you can read the status
-   Wire.read(); // status
-   Serial.print("FIFO overflow: 0x"); Serial.println(Wire.read(), HEX);
-   Serial.print("Circ avail: "); Serial.println(Wire.read());
-   Serial.print("Circ used: "); Serial.println(Wire.read());
-   Serial.print("FIFO avail: "); Serial.println(Wire.read());
-   Serial.print("FIFO used: "); Serial.println(Wire.read());
-   */
+  sendCommand(8);
+  
+  // get reply!
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
+  for (uint8_t x=0; x<7; x++) {
+    Wire.read();
+  }
+  */
+
+  /*   or you can read the status
+  Wire.read(); // status
+  Serial.print("FIFO overflow: 0x"); Serial.println(Wire.read(), HEX);
+  Serial.print("Circ avail: "); Serial.println(Wire.read());
+  Serial.print("Circ used: "); Serial.println(Wire.read());
+  Serial.print("FIFO avail: "); Serial.println(Wire.read());
+  Serial.print("FIFO used: "); Serial.println(Wire.read());
+  */
 }
 
 uint8_t Adafruit_Si4713::getStatus(void) {
-
-   Wire.beginTransmission(_i2caddr);
-   Wire.write(SI4710_CMD_GET_INT_STATUS);
-   Wire.endTransmission();
-   Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)1);
-   while (Wire.available() < 1) {
-     //Serial.print('.');
-     delay(1);
-   }
-   return  Wire.read();
+  Wire.beginTransmission(_i2caddr);
+  Wire.write(SI4710_CMD_GET_INT_STATUS);
+  Wire.endTransmission();
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)1);
+  while (Wire.available() < 1) {
+    //Serial.print('.');
+    delay(1);
+  }
+  return  Wire.read();
 }
 
-/**
-* Powers up Si4713 in FM Transmission mode with analog inputs and without RDS
-*/
 void Adafruit_Si4713::powerUp(void) {
 	/* Modified configuration, see Section 12.1, page 253 of AN332.pdf 
 	Not patching or checking revision
@@ -339,7 +342,7 @@ void Adafruit_Si4713::powerUp(void) {
 	_i2ccommand[0] = SI4710_CMD_POWER_UP;
 	_i2ccommand[1] = SI4710_CMD_POWER_UP_ARG_1;
 	_i2ccommand[2] = SI4710_CMD_POWER_UP_ARG_2;
-    sendCommand(3);
+  sendCommand(3);
 	
 	/* Reference Clock settings */
 	// Reference Clock 0x0201 see pg 34
@@ -377,40 +380,40 @@ void Adafruit_Si4713::powerUp(void) {
 	setProperty(SI4713_PROP_TX_ATTACK_TIME, 0x0000);
 	setProperty(SI4713_PROP_TX_RELEASE_TIME, 0x0004);
 	setProperty(SI4713_PROP_TX_ACOMP_GAIN, 0x0005);
-    setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0003);	
+  setProperty(SI4713_PROP_TX_ACOMP_ENABLE, 0x0003);	
 }
 
 uint8_t Adafruit_Si4713::getRev(void) {
-    _i2ccommand[0] = SI4710_CMD_GET_REV;
-    _i2ccommand[1] = 0;
+  _i2ccommand[0] = SI4710_CMD_GET_REV;
+  _i2ccommand[1] = 0;
 
-    sendCommand(2);
+  sendCommand(2);
 
-    Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)9);
+  Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)9);
 
-    Wire.read();
-    uint8_t pn = Wire.read();
-    uint8_t fw =  Wire.read();
-    fw <<= 8;
-    fw |= Wire.read();
-    uint8_t patch =  Wire.read();
-    patch <<= 8;
-    patch |= Wire.read();
-    uint8_t cmp =  Wire.read();
-    cmp <<= 8;
-    cmp |= Wire.read();
-    uint8_t chiprev = Wire.read();
+  Wire.read();
+  uint8_t pn = Wire.read();
+  uint8_t fw =  Wire.read();
+  fw <<= 8;
+  fw |= Wire.read();
+  uint8_t patch =  Wire.read();
+  patch <<= 8;
+  patch |= Wire.read();
+  uint8_t cmp =  Wire.read();
+  cmp <<= 8;
+  cmp |= Wire.read();
+  uint8_t chiprev = Wire.read();
 
-    /*
-    Serial.print("Part # Si47"); Serial.print(pn);
-    Serial.print("-"); Serial.println(fw, HEX);
+  /*
+  Serial.print("Part # Si47"); Serial.print(pn);
+  Serial.print("-"); Serial.println(fw, HEX);
 
-    Serial.print("Firmware 0x"); Serial.println(fw, HEX);
-    Serial.print("Patch 0x"); Serial.println(patch, HEX);
-    Serial.print("Chip rev "); Serial.write(chiprev); Serial.println();
-    */
+  Serial.print("Firmware 0x"); Serial.println(fw, HEX);
+  Serial.print("Patch 0x"); Serial.println(patch, HEX);
+  Serial.print("Chip rev "); Serial.write(chiprev); Serial.println();
+  */
 
-    return pn;
+  return pn;
 }
 
 void Adafruit_Si4713::setGPIOctrl(uint8_t x) {
@@ -428,9 +431,6 @@ void Adafruit_Si4713::setGPIO(uint8_t x) {
 
   sendCommand(2);
 }
-
-
-///
 
 /*
 void Adafruit_Si4713::rdstest() {
