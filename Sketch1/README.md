@@ -15,7 +15,7 @@ For audio streaming from Android mobile to FM radio
 | Sparkfun  Audio Bluetooth Breakout - RN-52 | 1 | [Sparkfun Audio Bluetooth Breakout](https://learn.sparkfun.com/tutorials/rn-52-bluetooth-hookup-guide#overview) | WRL-12849 |
 | Sparkfun FTDI Basic Breakout - 3.3V | 1 | [Sparkfun FTDI Basic Breakout](https://www.sparkfun.com/products/9873?_gl=1*173untz*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTI3MzMxNC4xNC4xLjE3MDUyNzQyMzcuNjAuMC4w&_ga=2.171073504.1571879566.1705185864-1752891384.1701105065) | DEV-09873 |
 | Mini Pushbutton Switch | 7 | [Mini Pushbutton](https://www.sparkfun.com/products/97?_gl=1*36uoho*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4wLjE3MDUxODU4NjMuNjAuMC4w&_ga=2.58816493.1571879566.1705185864-1752891384.1701105065) | COM-0097 |
-| Mini Power Switch - SPDT | 1 | [Mini Power Switch](https://www.sparkfun.com/products/102?_gl=1*1s0kwn0*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4xLjE3MDUxODY2OTMuNjAuMC4w&_ga=2.103970880.1571879566.1705185864-1752891384.1701105065) | COM-00102 |
+| Mini Power Switch - SPDT | 2 | [Mini Power Switch](https://www.sparkfun.com/products/102?_gl=1*1s0kwn0*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4xLjE3MDUxODY2OTMuNjAuMC4w&_ga=2.103970880.1571879566.1705185864-1752891384.1701105065) | COM-00102 |
 | USB Mini-B Cable | 1 | [Sparkfun USB Mini-B Cable](https://www.sparkfun.com/products/11301?_gl=1*6zq9iw*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTI3MzMxNC4xNC4xLjE3MDUyNzM4MTQuNjAuMC4w&_ga=2.170488672.1571879566.1705185864-1752891384.1701105065) | CAB-11301 |
 | Adafruit Perma-Proto 1/2 Sized Breadboard | 2 | [Adafruit Perma-Proto 1/2 Sized Breadboard](https://www.adafruit.com/product/571) | 571 |
 | Adafruit Perma-Proto 1/4 Sized Breadboard | 1 | [Adafruit Perma-Proto 1/4 Sized Breadboard](https://www.adafruit.com/product/589) | 589 |
@@ -27,34 +27,34 @@ For audio streaming from Android mobile to FM radio
 
 ### Programming
 
-![AVRDUDE](https://github.com/avrdudes/avrdude/)  
-![AVRDUDESS - A GUI for AVRDUDE](https://github.com/ZakKemble/AVRDUDESS?tab=readme-ov-file)
+[AVRDUDE](https://github.com/avrdudes/avrdude/)  
+[AVRDUDESS - A GUI for AVRDUDE](https://github.com/ZakKemble/AVRDUDESS?tab=readme-ov-file)
 
 ### CAD
 
-![Fritzing](https://fritzing.org/)
+[Fritzing](https://fritzing.org/)
 
 ### IDE
 
-![Arduino](https://docs.arduino.cc/software/ide/)
+[Arduino](https://docs.arduino.cc/software/ide/)
 
-![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
-![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
+[Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)  
+[Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
 
 ### IDE Extension
 
-![Visual Micro](https://www.visualmicro.com/)
-![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
+[Visual Micro](https://www.visualmicro.com/)  
+[Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
 
 ## Diagrams
 
 ### Fritzing
 
-![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/Fritzing-full.png)
+[BTFM Breadboard](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/Fritzing-full.png)
 
 ### Schematic
 
-![Fritzing](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/btfm_schem.png)
+[BTFM Schematic](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/btfm_schem.png)
 
 ## Versioning
 
@@ -318,28 +318,28 @@ If Equation 30 of AN710 datasheet is correct application for my antenna, I have 
 To hardware program & debug the Mega 2560 R3, 4 things are required:
 
 1. Cut the reset-en pads  
-![reset-en](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/reset_en1.jpg)  
+[reset-en](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/reset_en1.jpg)  
 ***CUTTING THE reset-en pads REQUIRES USING HARDWARE PROGRAMMING***
 2. JTAG .5mm pitch 2x5 connection  
 Adafruit SWD (2x5 1.27mm) Cable Breakout Board ID: 2743  
-![breakout board](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/2743-04.jpg)  
+[breakout board](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/2743-04.jpg)  
 **NB this is an SWD breakout, not a JTAG breakout**  
 *The pin outs are different and will have to be mapped!!!*
 3. AVR ISP Breadboard Adapter Mini Kit ID: 1465  
-![isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
+[isp adapter](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/1465-04.jpg)
 4. Atmel-ICE & cables  
-![Atmel-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)
+[Atmel-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)
 5. Microchip Studio 7  
-![Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
-![Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
+[Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+[Microchip Studio User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/Microchip-Studio-UserGuide-DS50002718.pdf)
 6. Visual Micro  
-![Visual Micro](https://www.visualmicro.com/)
-![Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
+[Visual Micro](https://www.visualmicro.com/)
+[Visual Micro Table of Contents](https://www.visualmicro.com/page/User-Guide.aspx?doc=index)
 
 ### Atmel-ICE Basic
 
 Atmel-ICE is a hardware programmer/debugger.
-![Atmel-ICE user guide](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/UserGuides/Atmel-ICE_UserGuide.pdf)
+[Atmel-ICE user guide](https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/UserGuides/Atmel-ICE_UserGuide.pdf)
 
 @TODO IPSUM LOREM  Microchip Studio 7 & Mega 2560 ICSP upload details
 
