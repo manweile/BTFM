@@ -6,3 +6,5 @@ __vm/
 # file ext to ignore
 *.xml
 *.cppproj
+src/_micro-api/*.d
+src/_micro-api/*.o
