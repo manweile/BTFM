@@ -50,7 +50,7 @@ For audio streaming from Android mobile to FM radio
 
 ### Fritzing
 
-[BTFM Breadboard](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/Fritzing-full.png)
+[BTFM Breadboard](../Images/Fritzing-full.png)
 
 ### Schematic
 
