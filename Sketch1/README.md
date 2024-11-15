@@ -55,7 +55,7 @@ For audio streaming from Android mobile to FM radio
 
 ### Schematic
 
-![BTFM Schematic](https://github.com/manweile/BTFM/blob/main/Sketch1/Images/btfm_schem.png)
+![BTFM Schematic](Images/btfm_schem.png)
 
 ## Versioning
 
