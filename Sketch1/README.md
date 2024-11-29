@@ -12,17 +12,19 @@ The concept is straight forward - bluetooth streaming music from an android devi
 I can stream music via the [ServiiGo app](https://serviio.org/apps) on my phone from my [Serviio Media Streamer Server](https://www.serviio.org/),  
 or play directly from stored media on my phone when I don't have cell service.  
 
-# Design
+## Design
 Initial research came up with the 2 critical components:  
 - [Sparkfun Audio Bluetooth Breakout](https://www.sparkfun.com/products/retired/12849)  
 - [Adafruit Stereo FM Transmitter](https://www.adafruit.com/product/1958)  
 
-Both of these breakouts were arduino compatible. I had several Uno's and Mega 2560's on hand, and used the Mega 2560 because it has more functionality.  
+Both of these breakouts were arduino compatible.  
+I had several Uno's and Mega 2560's on hand, and used the Mega 2560 because it has more functionality.  
 
-The Mega 2560 supplies the mcu.  
-The RN-52 is the bluetooth streamer and audio signal source.  
+The Mega 2560 supplies the microcontroller and power.  
+Perma-proto breadboards supply the substrate for hardwiring discrete components, breakouts & shields.  
+The RN-52 is the bluetooth sink from the android streaming source and audio signal source for the fm transmitter.  
 The Si4713 is the audio signal sink and transmits the audio in FM band.  
-The 2.8" LCD supplies gui I/O.  
+The 2.8" LCD is used for graphic user interface input and output.  
 
 # Versioning
 BTFM uses semantic versioning (Major.Minor.Patch)  
@@ -91,7 +93,7 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 | Breakaway Headers - Right Angle | 1 | [Sparkfun Headers - Right Angle](https://www.sparkfun.com/products/553) | PRT-00553 |
 |_________________________________________________________________________|_______|______________________________________________|__________________________|
 | Mini Pushbutton Switch | 8 | [Sparkfun Mini Pushbutton](https://www.sparkfun.com/products/97?_gl=1*36uoho*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4wLjE3MDUxODU4NjMuNjAuMC4w&_ga=2.58816493.1571879566.1705185864-1752891384.1701105065) | COM-0097 |
-| Mini Power Switch - SPDT | 2 | [Sparkfun Mini Power Switch](https://www.sparkfun.com/products/102?_gl=1*1s0kwn0*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4xLjE3MDUxODY2OTMuNjAuMC4w&_ga=2.103970880.1571879566.1705185864-1752891384.1701105065) | COM-00102 |
+| Mini Power Switch - SPDT | 3 | [Sparkfun Mini Power Switch](https://www.sparkfun.com/products/102?_gl=1*1s0kwn0*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4xLjE3MDUxODY2OTMuNjAuMC4w&_ga=2.103970880.1571879566.1705185864-1752891384.1701105065) | COM-00102 |
 | 10 uF Polarized Capacitor | 2 | [Sparkfun Electrolytic Decoupling Capacitors](https://www.sparkfun.com/products/523) | COM-00523 |
 | 0.47 uF Ceramic Capacitor | 2 | [Digikey Ceramic Capacitor](https://www.digikey.ca/en/products/detail/kemet/C315C474K5R5TA/3726125) | 399-9741-ND |
 | 68 kOhm resistor | 2 | [Sparkfun Resistor Kit](https://www.sparkfun.com/products/10969) | COM-10969 |
@@ -121,12 +123,12 @@ You will also need to know what fuse programming is and how to set the fuses for
 
 ## IDES
 [Arduino](https://docs.arduino.cc/software/ide/)  
-Using the Arduino IDE is somewhat optional.  
+Using the Arduino IDE is somewhat optional.   
 It easier to install libraries and boards via the Arduino IDE than Microchip Studio with Visual Micro extension for the simple fact of the extension installation and setup overhead.  
 That said, once you do have the extension installed, there is no need to use the Arduino IDE again.  
 
 [Microchip Studio Download](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)  
-[Setting Started with Microchip Studio](Docs/MicrochipStudio/Getting-Started-with-Microchip-Studio-DS50002712B.pdf)
+[Setting Started with Microchip Studio](Docs/MicrochipStudio/Getting-Started-with-Microchip-Studio-DS50002712B.pdf)  
 [Microchip Studio User Guide](Docs/MicrochipStudio/Microchip-Studio-UserGuide-DS50002718.pdf)  
 Microchip Studio is Microchip's (formerly Atmel) IDE for AVR/ARM applications, based on Visual Studio.  
 
@@ -146,20 +148,22 @@ The difference lies in Visual Micro's user interface which provides an advanced 
 ## Software Defined Radio
 [SDRSharp](https://airspy.com/download/)  
 [Getting Started with RTL-SDR and SDR-Sharp](Docs/Si4713/getting-started-with-rtl-sdr-and-sdr-sharp.pdf)  
+
 SDR Sharp is the software to use the SDR Receiver USB Stick.
 I used this software to listen to the fm transmission from the project.
 
 ## Terminal Emulator
 [TeraTerm Project](https://github.com/TeraTermProject/teraterm/releases)  
 [Tera Term Help Index](https://teratermproject.github.io/manual/5/en/)  
+
 TeraTerm is the terminal emulator for Microsoft Windows, that supports serial port, telnet and SSH connections. 
 
 ## Important Arduino IDE Setup
-The Arduino AVR Board Library has a known bug in versions greater than 1.82:  
+*The Arduino AVR Board Library has a known bug in versions greater than 1.82:*  
  
 [Downgrade Arduino AVR Boards to 1.82](https://github.com/LubomirJagos/LabVIEW-Universal-Transcriptor/issues/3)
 
-To workaround, use Arduino IDE tools>Board>Board Manager to select Arduino AVR Boards.  
+To workaround, use Arduino IDE tools > Board > Board Manager to select Arduino AVR Boards.  
 Select version 1.8.2 from drop down list.  
 
 ***DO NOT UPDATE THIS BOARD WHEN YOU OPEN THE ARDUINO IDE AND GET THE UPDATE INFO DIALOG BOX***
@@ -184,7 +188,7 @@ compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections -MMD
 ```
 and add:  
 ```
-compiler.c.flags=-c -g3 -O0 -w -ffunction-sections -fdata-sections -MMD
+compiler.c.flags=-c -g3 -Og -w -ffunction-sections -fdata-sections -MMD
 ```  
 likewise, do the same for the cpp compile flag:   
 ```  
@@ -192,7 +196,7 @@ compiler.cpp.flags=-c -g -Os -w -fno-exceptions -ffunction-sections -fdata-secti
 ```  
 and add:  
 ```   
-compiler.cpp.flags=-c -g3 -O0 -w -fno-exceptions -ffunction-sections -fdata-sections -MMD
+compiler.cpp.flags=-c -g3 -Og -w -fno-exceptions -ffunction-sections -fdata-sections -MMD
 ```  
 Change these as you see fit when you are ready for a production build.  
 
@@ -202,17 +206,21 @@ Change these as you see fit when you are ready for a production build.
 These libraries come installed with Arduino IDE, so all you have to do is reference them in code. latest version is fine.   
 [SPI](https://www.arduino.cc/reference/en/language/functions/communication/spi/)  
 [Wire](https://www.arduino.cc/reference/en/language/functions/communication/wire/)  
+
 ```c++
 #include <SPI.h>
 #include <Wire.h>
 ```
 
 ### Optional's
-ArduinoSTL needs installation.  Version does matter.  
-[ArduinoSTL](https://www.arduino.cc/reference/en/libraries/arduinostl/)  
+ArduinoSTL needs installation.  Version does matter.   
+[ArduinoSTL](https://www.arduino.cc/reference/en/libraries/arduinostl/)   
 v1.1.0  
+What we need out of ArduinoSTL:  
+
 1. algorithm
-2. vector
+2. vector  
+
 ```c++
 #include <ArduinoSTL.h>
 #include <algorithm>
@@ -233,6 +241,7 @@ v1.5.1
 
 [Adafruit Si4713 Library](https://www.arduino.cc/reference/en/libraries/adafruit-si4713-library/)  
 v1.0.0  
+
 ```c++
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
@@ -242,8 +251,8 @@ v1.0.0
 
 ## Project Fritzing  
 Note the Arduino Mega Proto Shield is not shown in the fritzing diagram for simplicity's sake.  
-Likewise, the 2.8"" TFT Capacitive touch shield is shown non-stacked for clarity.
 
+Likewise, the 2.8"" TFT Capacitive touch shield is shown non-stacked for clarity.  
 The fritzing image for the lcd screen, while electrically correct, is not physically correct.  
 The fritzing image is for a breakout, not a shield.
 
@@ -294,7 +303,7 @@ To hardware program & debug the Mega 2560 R3, four things are required:
 2. JTAG Connection  
 For **debugging** (*and uploading, if you wish*), you need a JTAG connection.  
 You will have to dedicate the Analog 4-7 pins on the Mega2560, as the board does not break out a JTAG header.  
-You will also be setting the JTAGEN fuse (covered in [Fuse Programming](#fuse-programming)).
+You will also be setting the JTAGEN fuse (covered in [Fuse Programming](#fuses).
 
      Finding a  shield/breakout specifically for AVR JTAG was a real pain.  
      Fortunately, this SWD breakout from Adafruit has everything you need, you just have to do the pin mapping to the Mega 2560.  
@@ -595,29 +604,60 @@ You have to use the ISP connection.
 
 ![RN-52](Images/RN-52.png)  
 
+The RN-52 Audio Bluetooth Breakout is a sleek Bluetooth audio module from Microchip (formerly Roving Networks).  
+The module broken out on an easy to use PCB that allows you to send stereo audio over a wireless Bluetooth connection.  
+
+The embedded DSP handles the audio stream entering and exiting the module, converting the digital wireless signals into audio and vice versa.  
+When streaming audio to the RN-52, the DSP converts the radio waves sent from the transmitter device (phone, computer, etc.)  
+into electrical signals that can then be sent to the amplifier and then to your audio output (speakers/headphones).
+
+The module is easy to configure with both ASCII commands and GPIO.  
+It can function as a stand alone module, or it can be incorporated with a microprocessor to create the ultimate wireless audio experience.
+
+### USB
+The USB lines are strictly used for device firmware update (DFU) mode.  
+Used in conjunction with GPIO3, the USBD+ and USBD- lines allow you to upload new firmware directly to the RN-52.  
+
 ### UART
-You will need a way to communicate to the module and send commands. This will be accomplished with a 3.3V FTDI Basic.  
-*If this is the first time you've plugged in a device of this nature into your computer, you may need to install the drivers.  
-Follow this guide:  
-[FTDI Driver Installation Guide](Docs/RN-52/How%20to%20Install%20FTDI%20Drivers%20-%20SparkFun%20Learn.pdf)*  
+The UART lines are used to communicate with and configure the RN-52.  
+Used in conjunction with GPIO9, the UART will allow you to send and receive serial commands to and from the module.  
+The UART can also be used to connect the module to an external microcontroller that issues commands and handles status updates.  
+
+### Audio In/Out
+These pins are reserved for audio input and output.  
+The RN-52 comes ready to stream audio right out of the box.  
+You can attach speakers directly to the speaker pins and get immediate gratification from wireless music.  
+The RN-52 has a built in integrated amplifier capable of driving two 16Ω speakers or most standard headphones.  
+The speaker outputs can also be attached to an external amplifier for greater amplification.
+We will be sending the speaker output to the Si4713.
 
 #### Discovering your device
+You will need a way to communicate to the module and send commands. This will be accomplished with a 3.3V FTDI Basic.  
+*If this is the first time you've plugged in a device of this nature into your computer, you may need to install the drivers.  
+Follow this guide: [FTDI Driver Installation Guide](Docs/RN-52/How%20to%20Install%20FTDI%20Drivers%20-%20SparkFun%20Learn.pdf)*  
+
 1. Connect FTDI to your computer with usb mini-b cable  
 2. Open Windows Device Manager
-3. Once you've got Device Manger open, expand the Ports tab
+3. Once you've got Device Manger open, expand the Ports tab  
+   
+   ![USB Serial Port](Images/USB_serial_port.png)  
+
 4. You should see "USB Serial Port (COM N)"
 5. Right click on "USB Serial Port"
 6. Select Properties
 7. Select Driver tab
 8. The driver provider should be FTDI  
 
+     ![USB Serial Port Driver](Images/USB_serial_port_driver.png)  
+
 *If you do have multiple devices and are not sure which device is the one you just plugged in,  
 unplug it, watch for whichever COM port disappears, and then plug it back in.  
 The COM port should reappear, letting you know that's the device you're looking for.*  
 
 **Make note of your com port, you will need for TeraTerm setup**  
+***Check your Com port often!! It WILL change!!***  
 
-#### TeraTerm
+### TeraTerm
 Download: [TeraTerm Project](https://github.com/TeraTermProject/teraterm/releases)  
 Once you have TeraTerm installed, open up it up.  
 Setup > Serial port  
@@ -634,21 +674,34 @@ You should see the Com port from your FTDI setup.
 
 Adjust to what you need to and hit "New Setting", which automatically save the configuration.  
 
-### Firmware Upgrade
-Firmware v1.16 provides many new features such as DFU over UART, advanced CODEC support, DAC/ADC mode, and an updated event handling mechanism.
+### Firmware Setup
+There several different things that can be done with the firmware wiring configuration: 
+1. Upgrade Firmware
+2. Configure Module
+3. Restore Factory Defaults
 
-#### Firmware Upgrade Fritzing
+The notable difference between firmware wiring and production wiring is the firmware wiring is done on breadboards instead of prototype shields,  
+and the RN-52 PWR_EN pin is directly connected to 3.3V, which means that when power is supplied, the RN-52 will start up immediately.  
+Also, the production wiring does not have the mini USB for firmware upgrade. 
+
+On the production wiring, to fully power up the RN-52, you need to hold the power button down for approximately 1 second.
+
+#### Firmware Fritzing
 Since this procedure will really only happen once, no need for a hard wired proto board.  
 
 ![Firmware Breadboard](Images/dfu_update_bb.png)  
 
-#### Firmware Upgrade Schematic
+#### Firmware Schematic
 ![Firmware Schematic](Images/dfu_update_schem.png)  
 
 ### Firmware Upgrade Procedure
+#### GPIO3
+To upgrade the firmware, we need GPI03 pulled HIGH at boot up - refer to [fritzing diagram](#project-fritzing).  
 You only have to upgrade the firmware once.  
+Firmware v1.16 provides many new features such as DFU over UART, advanced CODEC support, DAC/ADC mode, and an updated event handling mechanism.  
+
 1. Navigate to [Microchip RN52](https://www.microchip.com/en-us/product/RN52#Tools%20And%20Software) 
-2. Install the Microchip Bluetooth DFU Utility using the ‘Microchip Bluetooth DFU Utility Installer.exe’.  
+2. Install the Microchip Bluetooth DFU Utility using the ‘Microchip Bluetooth DFU Utility Installer.exe’
 3. Download the RN52-I/RM116 DFU Image
 4. Download the release notes for the image  
 **While the release notes say use DFU over UART, DFU over USB works just fine**  
@@ -685,64 +738,80 @@ You only have to upgrade the firmware once.
     ![DFU Finish](Images/DFU_finish.png)  
 
 16. Take DFU Mode switch out of high
-17. Open TeraTerm 
-18. Put Cmd Mode Switch to low (GPI09 to GND)
-19. Enter v for version information. YOu Should get RN52-I Ver 1.16
-20. Power Down RN-52 or proceed to [Configure the RN52 Module](#configure-the-rn-52-module), skipping steps 1 - 6
-
-### Power
-**First and foremost, the RN-52 is a 3.3V device.**  
-It can handle an input voltage of about 3.0 - 3.6V.  
-Voltages above or below this range can result in the module not working properly or, worse, damaging the module.  
-Make sure you select a power supply that can provide the correct amount of voltage to the device.  
-Connect the GND pin to GND, and connect the 3.3V pin to the Vcc pin on the supply.  
-The PWR_EN pin can also be attached to a button to allow the user to power up the module when it is desired, even if power is already supplied.  
-This is useful in headset/hands-free applications where a battery is attached to the module but the module doesn't need to be on all the time.  
-
-### GPIO4
-Restore Factory Defaults with GPIO4  
-You should connect the GPIO4 pin to a switch, jumper, or resistor so it can be accessed.  
-You can use this pin to reset the module to its factory default settings, which is critical in situations where the module has been mis-configured.  
-To reset the module to the factory defaults, GPIO4 should be high on power-up and then *toggle low, high, low, high with a 1 second wait between the transitions.*  
-
-### GPIO9
-GPIO9 is used to tell the module to enter command mode.  
-If GPIO9 is HIGH or left floating, the module will remain in its default data mode, streaming audio or data.  
-In order to enter command mode, GPIO9 must be pulled LOW (to GND). Refer to fritzing diagram.  
+17. Open TeraTerm (make sure you use the correct com port - check device manager if needed)
+18. Put CMD Mode Switch to low (GPI09 to GND)
+19. Wait for "CMD" in terminal output
+20. Enter v for version information. You Should get "RN52-I Ver 1.16" in terminal output
+21. Power Down RN-52
 
 ### Configure the RN-52 Module
-Download and read the [Bluetooth Audio Module Command Reference User's Guide](Docs/RN-52/Microchip%20Bluetooth%20Audio%20Command%20Module%20Reference%20users%20Guide.pdf)  
+#### GPIO9
+GPIO9 is used to tell the module to enter command mode.  
+If GPIO9 is HIGH or left floating, the module will remain in its default data mode, streaming audio or data.  
+In order to enter command mode, GPIO9 must be pulled LOW (to GND) after startup - refer to [fritzing diagram](#project-fritzing)).  
 
-Now that you can actually power up the RN-52 and send it into command mode, let's talk about changing the settings, and thus the behavior, of the Bluetooth module.  
-1. Make sure the CMD Mode switch is in the OFF position (GPIO9 NOT shorted to GND - refer to [fritzing diagram](#project-fritzing)).
-2. Turn on your RN-52, and hold down the power reset button for approx 1 second.
-3. The two status LEDs on the RN-52 should both stay solid for about 1 second and then begin flashing alternately.
-4. Your device is now ready to make a connection. Rather than connect over Bluetooth, the connection will be made over the serial UART.
-5. Open a TeraTerm terminal window on the port (COM 9) your RN-52 has been assigned (115200 Baud, 8,N,1).
-6. With the terminal open and connected to the RN-52, flip the CMD Mode switch to the ON position (GPIO9 shorted to GND). You should now see CMD appear in your terminal.  
+Download and read the [Bluetooth Audio Module Command Reference User's Guide](Docs/RN-52/Microchip%20Bluetooth%20Audio%20Command%20Module%20Reference%20users%20Guide.pdf).  
+
+1. Make sure the CMD Mode switch is in the OFF position
+2. Power up RN-52
+   1. Firmware Wiring: just turn on the power
+   2. Production wiring: turn on power, and hold down the power reset button for approx 1 second
+3. The two status LEDs on the RN-52 should both stay solid for about 1 second and then begin flashing alternately
+4. Your device is now ready to make a connection.  
+     Rather than connect over Bluetooth, the connection will be made over the serial UART.
+5. Open a TeraTerm terminal window on the enumerated port (from device manager check), and confirm settings (115200 Baud, 8,N,1).
+6. Flip the CMD Mode switch to the ON position.  
+   You should now see CMD appear in your terminal.  
 7. Turn on echo by typing + and hitting return.  
-8. Enable AVRCP. By default, the RN-52 does not have the AVRCP enabled. This is part of the extended features.  
-   When you type D to see the basic settings, you'll notice a line that says ExtFeatures=XX, where XX is some hex value.  
-9.  Send the command S%,1007(/r) to enable what we want.  
-    per 2.2.4 of Command Reference Guide,  
-    Bit 0 – Enable AVRCP buttons for EK  
-    Bit 1 – Enable reconnect on power-on  
-    Bit 2 – Discoverable on start up  
-    Bit 12 – Enable track change event   
-    
-10. Then follow it up with a reboot -- R,1(/r), wait until you see reboot, then flip the CMD Mode switch back to Off.  
-     Hold down the power reset button for approx 1 second. You should now have AVRCP enabled.  
-     Flip the CMD Mode switch back to on (and turn echo on as well).  
-1.  Type D to double check the settings.  
-2.  To exit command mode, simply flip the switch back to the OFF position. You will see END appear in the window.  
-3.  Close TeraTerm.
+8. Set Extended Features per 2.2.4  
+     S%,1007(/r)
+     Bit 0:  Enable AVRCP buttons  
+     Bit 1:  Enable reconnect on power-on  
+     Bit 2:  Discoverable on start up  
+     Bit 12: Enable track change event   
+9.  Set A2DP Audio Route per 2.2.1 for analog output  
+     S|,00(/r)  
+10. Set Authentication per 2.2.5 to open    
+     SA,0(/r)
+11. Set Discovery Mask per 2.2.7 to A2DP  
+     SD,04(/r)
+12. Set Connection Mask per 2.2.9 to A2DP  
+    SK,04(/r)
+13. Set Speaker Gain per 2.2.13  to max  
+     SS,0F
+14. Reboot  
+    R,1(/r)
+    1.  wait until you see "reboot" in terminal output
+    2.  flip the CMD Mode switch back to Off
+    3.  Power cycle the RN-52
+    4.  Flip the CMD Mode switch back to on (and turn echo on as well)
+15. Type D(/r) to double check the settings.  
+ 
+     ![RN-52 Configured](Images/RN52_configured.png)  
+
+16. Exit command mode, flip the switch back to the OFF position.  
+17. You will see END appear in the window.  
+18. Close TeraTerm.  
+
+### Restore Factory Defaults
+#### GPI04
+You can use GPIO4 pin to reset the module to its factory default settings, which is critical in situations where the module has been mis-configured  
+You should connect the GPIO4 pin to a button or switch for easy use  
+To reset the module to the factory defaults, toggle the button between high and low in 1 second intervals  
+
+1. GPIO4 should be high on power-up (button released)
+2. Toggle low (button pressed)
+3. Toggle high (release button)
+4. Toggle low (button pressed)
+5. Toggle high (release button)
+6. Power cycle the RN-52  
 
 #### RN-52 Status LED Functions
-| Green LED | Red LED | Description |
-| --------- | ------- | ----------- |
-| Flashing | Flashing | The module is discoverable |
-| Off | Flashing | The module is connected |
-| Flashing | Off | The module is connectable |
+| Green LED      | Red LED         | Description                |
+| -------------- | --------------- | -------------------------- |
+| Fast Flashing  | Fast Flashing   | The module is discoverable |
+| Off            | Triple Flashing | The module is connected    |
+| Fast Flashing  | Off             | The module is connectable  |
 
 #### Connect and Play
 1. The green led and red led should be flashing alternately.
@@ -762,7 +831,16 @@ The only real caveat is Adafruit choose to neuter the I2C digital audio input fu
 
 [Si4713 Programming Guide](Docs/Si4713/SiLabs+Programming+guide+AN332.pdf)  
 [Si4713 Data Sheet](Docs/Si4713/Si4712-13-B30.pdf)  
+
+The very thin wire Adafruit supplies for the antenna makes for a very fragile solder connection.  
+I thoroughly damaged one breakout to the point of making in unusable.  
+That is why I elected to support the the breakout with two headers.  
+
 [Adafruit Si4713 FM Radio Transmitter](Docs/Si4713/adafruit-si4713-fm-radio-transmitter-with-rds-rdbs-support.pdf)  
+
+### Testing the SI4713
+Setup the [Adafruit SDR Receiver USB Stick](https://www.adafruit.com/product/1497) and use [SDRSharp](https://airspy.com/download/)   
+[Getting Started with RTL-SDR and SDR-Sharp](Docs/Si4713/getting-started-with-rtl-sdr-and-sdr-sharp.pdf)  
 
 ### Speaker Level to Line Level
 The RN-52 audio output circuitry consists of a balanced differential speaker output preceded by a gain stage and a class AB amplifier.  
