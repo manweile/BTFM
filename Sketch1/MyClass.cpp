@@ -8,19 +8,6 @@
 // Project
 #include "MyClass.h"
 
-// Arduino
-#include <ArduinoSTL.h>
-#include <algorithm>
-#include <vector>
-#include <SPI.h>
-#include <Wire.h>
-
-// Third Party Hardware
-#include <Adafruit_GFX.h>
-#include <Adafruit_ILI9341.h>
-#include <Adafruit_FT6206.h>
-#include <Adafruit_Si4713.h>
-
 /* Pin definitions*/
 // Si4713
 #define RESETPIN 22					// reset Si4713 on Mega 2560

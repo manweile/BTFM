@@ -1,4 +1,0 @@
-# Sketch1 build property overrides
-#
-
-
