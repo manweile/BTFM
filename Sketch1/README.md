@@ -48,7 +48,7 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 - custom pcb design and manufacture  
 
 ## Previous Versions
-1.5.1 First production deployable version.
+1.5.1 First production deployable version.  
 1.5.0 Added 4 channel logic level shifter board.  
 1.4.0 Added mini USB connection and updated RN-52 DFU firmware.  
 1.3.0 Added inductor for tx antenna and dc coupling capacitors for audio quality.  
