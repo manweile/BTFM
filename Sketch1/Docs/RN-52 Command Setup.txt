@@ -1,0 +1,17 @@
+#Bit 0, enable AVRCP
+#Bit 1, Enable reconnect on power-on
+#Bit 2, Discoverable on startup
+#Bit 12, Enable track change event
+S%,1007	
+
+#set routing to A2DP profile
+S|, 0000
+
+#set discovery mask to A2DP
+SD, 04
+
+#set connection mask to A2DP
+SK, 04
+
+#set speaker gain level
+SS, 0F
