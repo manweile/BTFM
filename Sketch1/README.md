@@ -170,16 +170,17 @@ Select version 1.8.2 from drop down list.
 
 ## Important Visual Micro Setup
 Visual Micro comes with it's own set of issues.  
-One of the most frustrating is the **compilation flags are hard coded in the platform.txt file installed by the extension**,  
+One of the most frustrating is the **compilation flags are hard coded in the platform.txt file installed by the extension AND the Arduino IDE**,  
 ( which contains definitions for the CPU architecture used - compiler, build process parameters, tools used for upload, etc.).  
 
 This is fine for beginning users coming the Arduino IDE - the whole point is to make development easier.  
-Why Visual Micro elected to use the hard coded approach baffles me - doing so means that any compiler flags you want to set in Microchip **are overridden**.  
+Why Visual Micro elected to use the hard coded approach baffles me - doing so means that any compiler flags you want to set in Microchip **are overridden - by both VisualMicro and Arduino!!.**   
 
 So if you want to compile a non-optimized max debug level hex file, you *can't*.  
 
-The platform.txt file is located at:  
-*C:\Program Files (x86)\Atmel\Studio\7.0\Extensions\\{extension id}\Micro Platforms\mpide\hardware\arduino\\*
+The platform.txt files are located at :  
+*C:\Program Files (x86)\Atmel\Studio\7.0\Extensions\\{extension id}\Micro Platforms\mpide\hardware\arduino\\*  
+*C:\Users\\{user name}\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\\*  
 
 The default flags are -g -Os (minimal debgug level and optimize for size).  
 For example, to compile a max debug level no optimization build, comment out original line:  
@@ -198,7 +199,7 @@ and add:
 ```   
 compiler.cpp.flags=-c -g3 -Og -w -fno-exceptions -ffunction-sections -fdata-sections -MMD
 ```  
-Change these as you see fit when you are ready for a production build.  
+***Change these as you see fit when you are ready for a production build.***   
 
 # Project
 ## Arduino Libraries
@@ -827,7 +828,9 @@ To reset the module to the factory defaults, toggle the button between high and 
 ![Si4713](Images/Si4713.png)  
 
 This breakout board, based on the Si4713, is an all-in-one stereo audio FM transmitter that can also transmit RDS/RBDS data.  
-The only real caveat is Adafruit choose to neuter the I2C digital audio input functionality, so they only wrote code supporting analog audio input.  
+The only real caveat is Adafruit choose to neuter the I2C digital audio input functionality,  
+(if you look at the schematic, the DIN & DFS have been shorted to GND),  
+so they only wrote code supporting analog audio input.  
 
 [Si4713 Programming Guide](Docs/Si4713/SiLabs+Programming+guide+AN332.pdf)  
 [Si4713 Data Sheet](Docs/Si4713/Si4712-13-B30.pdf)  
