@@ -33,18 +33,12 @@ Minor: Non-breaking changes Eg. new code functionality, new compatible hardware
 Patch: All other non-breaking changes Eg. Bug fixes, comments  
 
 ## Current Version
-1.5.1 Production deployable version.
-- Normalized debugging directives   
-- refactored for doxygen function headers  
-- generated doxygen documentation  
-- readme finalized
-
-## Planned Versions
 1.6.0 Media Information  
 - Display current media information on lcd touch screen 
 - Display next media information
 - Display previous media information 
-  
+
+## Planned Versions
 1.6.1 Full UI control
 - lcd touch screen UI control of play/pause/for/rev/volume
 - re-scan for available broadcast frequencies  
@@ -54,6 +48,7 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 - custom pcb design and manufacture  
 
 ## Previous Versions
+1.5.1 First production deployable version.
 1.5.0 Added 4 channel logic level shifter board.  
 1.4.0 Added mini USB connection and updated RN-52 DFU firmware.  
 1.3.0 Added inductor for tx antenna and dc coupling capacitors for audio quality.  
