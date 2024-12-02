@@ -7,11 +7,17 @@
 
 #include "MyClass.h"
 
+/**
+ * @brief Calls the setup function.
+ */
 void setup()
 {
 	myClass.setup();
 }
 
+/**
+ * @brief Initiates loop.
+ */
 void loop()
 {
 	myClass.loop();

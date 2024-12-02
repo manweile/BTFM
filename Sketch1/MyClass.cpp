@@ -1,25 +1,12 @@
 /*
- * MyClass.cpp
+ * @file MyClass.cpp
  *
- * Created: 2/17/2024 4:48:38 PM
- * Author: Gerald
+ * @created 2/17/2024 4:48:38 PM
+ * @author Gerald Manweiler
  */
 
 // Project
 #include "MyClass.h"
-
-// Arduino
-#include <ArduinoSTL.h>
-#include <algorithm>
-#include <vector>
-#include <SPI.h>
-#include <Wire.h>
-
-// Third Party Hardware
-#include <Adafruit_GFX.h>
-#include <Adafruit_ILI9341.h>
-#include <Adafruit_FT6206.h>
-#include <Adafruit_Si4713.h>
 
 /* Pin definitions*/
 // Si4713
@@ -67,9 +54,18 @@ Adafruit_FT6206 ts = Adafruit_FT6206();
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 
-/*Forward  Init Functions */
+/*Forward Init Functions */
+/**
+ * @brief Scans FM band for stations.
+ * @details Finds lowest noise level frequency stations and returns that frequency for broadcast use.
+ * @return uint16_t newBroadcast The new frequency to broadcast on
+ */
 uint16_t availableChannels();
 
+/**
+ * @brief Sets up hardware.
+ * @details Initializes lcd and fm transceiver.
+ */
 void MyClass::setup()
 {
 	volatile uint16_t station = FMSTATION;
@@ -111,7 +107,7 @@ void MyClass::setup()
 			radio.readTuneStatus();
 
 			if( radio.currNoiseLevel >= BROADCAST_LEVEL) {
-				// Brekapoint action message: Broadcast at {freq/100.0} Mhz, Current Noise Level: {radio.currNoiseLevel}
+				// Breakpoint action message: Broadcast at {freq/100.0} Mhz, Current Noise Level: {radio.currNoiseLevel}
 				NOP;
 			}
 		}
@@ -129,8 +125,8 @@ void MyClass::setup()
 	#endif
 
 	/*
-	readTuneMeasure(freq) in avalaibleChannels enters receive mode (disables transmitter output power)
-	so have to call setTxPower after avalaibleChannels called
+	readTuneMeasure(freq) in availableChannels enters receive mode (disables transmitter output power)
+	so have to call setTxPower after availableChannels called
 	*/
 	radio.setTXpower(TX_POWER);
 	radio.tuneFM(station);
@@ -146,8 +142,13 @@ void MyClass::setup()
 	#endif
 }
 
+/**
+ * @brief Allows program to change and respond.
+ * @details Loops continuously until power down.
+ */
 void MyClass::loop()
 {
+	// get fm chip stats 
 	#if DEBUG_FM_TX
 		// for changes in antenna capacitance
 		radio.readTuneStatus();
@@ -176,14 +177,6 @@ void MyClass::loop()
 	// @TODO if ASQ is not over modulating, increase rn-52 output volume 1 step and print to screen
 }
 
-/**
-* FM Functions
-*/
-
-/**
-* Scans FM band for stations with lowest noise level frequency stations and returns that frequency for broadcast use
-* @return{uint16_t} newBroadcast The new frequency to broadcast on
-*/
 uint16_t availableChannels()
 {
 	volatile uint16_t FMSTATION = 8770;		// default station 8770 == 87.70 MHz
