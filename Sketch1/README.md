@@ -70,7 +70,7 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 | Software Defined Radio Receiver | 1 | [Adafruit SDR Receiver USB Stick](https://www.adafruit.com/product/1497) | 1497 |
 | Wall Wart Power Supply | 1 | [Digikey AC/DC Wall Mount Adapter](https://www.digikey.ca/en/products/detail/cui-inc/SWI24-12-N-P5R/5415102) | 102-3631-ND |
 | USB Mini-B Cable | 1 | [Sparkfun USB Mini-B Cable](https://www.sparkfun.com/products/11301?_gl=1*6zq9iw*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTI3MzMxNC4xNC4xLjE3MDUyNzM4MTQuNjAuMC4w&_ga=2.170488672.1571879566.1705185864-1752891384.1701105065) | CAB-11301 |
-|_________________________________________________________________________|_______|______________________________________________|__________________________|
+|__________________________________________________|_______|______________________________________________|__________________________|
 | Arduino Mega2560 R3 Board | 1 | [Sparkfun Arduino Mega 2560 R3](https://www.sparkfun.com/products/11061) | DEV-11061 |
 | 2.8" TFT Capacitive Touch with microSd | 1 | [Adafruit 2.8" TFT Touch Shield](https://www.adafruit.com/product/1947) | 1947 |
 | Stereo FM Transmitter with RDS/RDBS Breakout | 1 | [Adafruit Stereo FM Transmitter](https://www.adafruit.com/product/1958) | 1958 |
@@ -81,17 +81,17 @@ Patch: All other non-breaking changes Eg. Bug fixes, comments
 | SWD Breakout Board | 1 | [Adafruit SWD Cable Breakout Board](https://www.adafruit.com/product/2743) | 2743 |
 | AVR ISP Adapter | 1 | [Adafruit AVR 6 Pin ISP Adapter](https://www.adafruit.com/product/1465) | 1465 |
 | USB Mini-B Breakout Board | 1 | [Adafruit USB Mini-B Breakout Board](https://www.adafruit.com/product/1764) | 1764 |
-|_________________________________________________________________________|_______|______________________________________________|__________________________|
+|___________________________________________________|_______|______________________________________________|__________________________|
 | Perma-Proto 1/2 Sized Breadboard | 3 | [Adafruit Perma-Proto 1/2 Sized Breadboard](https://www.adafruit.com/product/571) | 571 |
 | Perma-Proto 1/4 Sized Breadboard | 1 | [Adafruit Perma-Proto 1/4 Sized Breadboard](https://www.adafruit.com/product/589) | 589 |
 | Arduino Mega Proto Shield | 1 | [Arduino Mega Proto Shield Rev3](https://store.arduino.cc/products/arduino-mega-proto-shield-rev3-pcb?srsltid=AfmBOoqN59Zec0_bKIih6BLsr4rHgGG_DDj2sNOlPADLfpzvrRtf7udL) | A000080 |
-|_________________________________________________________________________|_______|______________________________________________|__________________________|
+|___________________________________________________|_______|______________________________________________|__________________________|
 | Female Headers | 10 | [Sparkfun Female Headers](https://www.sparkfun.com/products/115) | PRT-00115 |
 | Stackable Header | 2 | [Sparkfun 3 Pin Stackable Header](https://www.sparkfun.com/products/13875) | PRT-13875 |
 | Arduino Stackable Header | 1 | [Sparkfun Arduino Uno Stackable Header Kit](https://www.sparkfun.com/products/11417) | PRT-11417 |
 | Breakaway Headers - Straight | 1 | [Sparkfun Headers - Straight](https://www.sparkfun.com/products/10158) | PRT-10158 |
 | Breakaway Headers - Right Angle | 1 | [Sparkfun Headers - Right Angle](https://www.sparkfun.com/products/553) | PRT-00553 |
-|_________________________________________________________________________|_______|______________________________________________|__________________________|
+|___________________________________________________|_______|______________________________________________|__________________________|
 | Mini Pushbutton Switch | 8 | [Sparkfun Mini Pushbutton](https://www.sparkfun.com/products/97?_gl=1*36uoho*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4wLjE3MDUxODU4NjMuNjAuMC4w&_ga=2.58816493.1571879566.1705185864-1752891384.1701105065) | COM-0097 |
 | Mini Power Switch - SPDT | 3 | [Sparkfun Mini Power Switch](https://www.sparkfun.com/products/102?_gl=1*1s0kwn0*_ga*MTc1Mjg5MTM4NC4xNzAxMTA1MDY1*_ga_T369JS7J9N*MTcwNTE4NTg2My4xMS4xLjE3MDUxODY2OTMuNjAuMC4w&_ga=2.103970880.1571879566.1705185864-1752891384.1701105065) | COM-00102 |
 | 10 uF Polarized Capacitor | 2 | [Sparkfun Electrolytic Decoupling Capacitors](https://www.sparkfun.com/products/523) | COM-00523 |
