@@ -759,8 +759,9 @@ Download and read the [Bluetooth Audio Module Command Reference User's Guide](Do
 6. Flip the CMD Mode switch to the ON position.  
    You should now see CMD appear in your terminal.  
 7. Turn on echo by typing + and hitting return.  
-8. Set Extended Features per 2.2.4  
-     S%,1007(/r)
+8. Set Extended Features per 2.2.4    
+     S%,1007(/r)  
+     0001 0000 0000 0111  
      Bit 0:  Enable AVRCP buttons  
      Bit 1:  Enable reconnect on power-on  
      Bit 2:  Discoverable on start up  
